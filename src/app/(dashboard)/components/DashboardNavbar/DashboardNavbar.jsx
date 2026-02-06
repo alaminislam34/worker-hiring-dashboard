@@ -48,7 +48,7 @@ const DashboardNavbar = () => {
         >
           <Menu size={20} />
         </button>
-        <h1 className="text-base md:text-lg lg:text-xl text-slate-800">
+        <h1 className="text-base md:text-lg lg:text-xl text-slate-800 md:block hidden">
           {pageTitle}
         </h1>
       </div>
@@ -71,12 +71,12 @@ const DashboardNavbar = () => {
               width={24}
               height={24}
               alt={ln === "en" ? "England Flag" : "China Flag"}
-              className="rounded-xl w-full h-full overflow-hidden"
+              className="h-8 rounded-xl w-full md:h-full overflow-hidden"
             />
             <div>
               <select
                 name=""
-                className="text-gray-500 focus:outline-none"
+                className="text-gray-500 focus:outline-none text-xs md:text-sm lg:text-base"
                 value={ln}
                 onChange={(e) => setLn(e.target.value)}
               >
