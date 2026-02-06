@@ -10,7 +10,7 @@ import { StateProvider } from "../providers/StateProviders";
 
 export default function DashboardLayout({ children }) {
   return (
-    <main className="flex h-screen overflow-hidden">
+    <main className="flex min-h-screen">
       <Toaster position="top-center" containerStyle={{ zIndex: 99999 }} />
       <StateProvider>
         {/* <QueryProvider> */}
@@ -21,14 +21,14 @@ export default function DashboardLayout({ children }) {
         </aside>
 
         {/* Main Content Area */}
-        <section className="flex-1 flex flex-col min-w-0 h-screen relative z-10">
+        <section className="flex-1 flex flex-col min-w-0 min-h-screen relative z-10">
           {/* Sticky Header with Padding */}
-          <header className="sticky top-0 border-b border-b-gray-100 z-50 p-4 pb-2">
+          <header className="sticky top-0 border-b border-b-gray-100 bg-white z-50 p-4 pb-2">
             <DashboardNavbar />
           </header>
 
           {/* Scrollable Body Content Area */}
-          <div className="flex-1 overflow-y-auto overflow-x-hidden space-y-6 scroll-smooth bg-gray-50">
+          <div className="flex-1 overflow-y-auto space-y-6 scroll-smooth bg-gray-50">
             <DashboardLayout2 children={children} />
           </div>
         </section>
