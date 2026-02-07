@@ -15,25 +15,31 @@ import {
 import { HiOutlineLogout } from "react-icons/hi";
 import Image from "next/image";
 import { StateContext } from "@/app/providers/StateProviders";
+import { useTranslation } from "react-i18next";
+import { normalizeLanguage } from "@/i18n/config";
 
 const NAV_LINKS = [
-  { name: "Dashboard", icon: LayoutGrid, href: "/dashboard" },
-  { name: "Order", icon: IdCard, href: "/dashboard/order" },
-  { name: "Buyer", icon: IdCard, href: "/dashboard/buyer" },
-  { name: "Worker", icon: Users, href: "/dashboard/worker" },
-  { name: "Payment", icon: FileText, href: "/dashboard/payment" },
+  { key: "dashboard", icon: LayoutGrid, href: "/dashboard" },
+  { key: "order", icon: IdCard, href: "/dashboard/order" },
+  { key: "buyer", icon: IdCard, href: "/dashboard/buyer" },
+  { key: "worker", icon: Users, href: "/dashboard/worker" },
+  { key: "payment", icon: FileText, href: "/dashboard/payment" },
 ];
 
 const DashboardNavbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [ln, setLn] = useState("en");
   const { isOpen, setIsOpen } = useContext(StateContext);
   const pathname = usePathname();
+  const { t, i18n } = useTranslation();
+  const currentLang = normalizeLanguage(
+    i18n.resolvedLanguage || i18n.language || "en",
+  );
+  const isChinese = currentLang === "zh-CN";
 
   const pageTitle = useMemo(() => {
     const activeLink = NAV_LINKS.find((link) => link.href === pathname);
-    return activeLink ? activeLink.name : "Management";
-  }, [pathname]);
+    return activeLink ? t(`nav.${activeLink.key}`) : t("nav.management");
+  }, [pathname, t, i18n.language]);
 
   const closeSidebar = () => setIsSidebarOpen(false);
 
@@ -44,7 +50,7 @@ const DashboardNavbar = () => {
           type="button"
           onClick={() => setIsSidebarOpen(true)}
           className="p-2 transition-colors duration-300 lg:hidden shrink-0 rounded-lg"
-          aria-label="Open Menu"
+          aria-label={t("a11y.openMenu")}
         >
           <Menu size={20} />
         </button>
@@ -67,21 +73,25 @@ const DashboardNavbar = () => {
         <div>
           <div className="flex items-center gap-2">
             <Image
-              src={`/images/${ln === "en" ? "england.png" : "china.png"}`}
+              src={`/images/${isChinese ? "china.png" : "england.png"}`}
               width={24}
               height={24}
-              alt={ln === "en" ? "England Flag" : "China Flag"}
+              alt={
+                isChinese ? t("a11y.chineseFlag") : t("a11y.englishFlag")
+              }
               className="h-8 rounded-xl w-full md:h-full overflow-hidden"
             />
             <div>
               <select
                 name=""
                 className="text-gray-500 focus:outline-none text-xs md:text-sm lg:text-base"
-                value={ln}
-                onChange={(e) => setLn(e.target.value)}
+                value={currentLang}
+                onChange={(e) =>
+                  i18n.changeLanguage(normalizeLanguage(e.target.value))
+                }
               >
-                <option value="en">English</option>
-                <option value="zh">China</option>
+                <option value="en">{t("language.english")}</option>
+                <option value="zh-CN">{t("language.chinese")}</option>
               </select>
             </div>
           </div>
@@ -92,13 +102,13 @@ const DashboardNavbar = () => {
               src="/images/avatar.png"
               width={24}
               height={24}
-              alt="User Avatar"
+              alt={t("a11y.userAvatar")}
               className="rounded-full w-full h-full aspect-square"
             />
           </div>
           <div>
             <p className="text-sm font-medium text-gray-800">Justin Leo</p>
-            <p className="text-xs text-gray-500">Admin</p>
+            <p className="text-xs text-gray-500">{t("nav.admin")}</p>
           </div>
         </div>
       </div>
@@ -138,12 +148,12 @@ const DashboardNavbar = () => {
             </div>
 
             <h2 className="text-base font-bold text-gray-900 truncate">
-              Admin Dashboard
+              {t("brand.adminDashboard")}
             </h2>
           </div>
 
           <ul className="flex-1 flex flex-col gap-1.5 overflow-y-auto custom-scrollbar">
-            {NAV_LINKS.map(({ name, href, icon: Icon }) => {
+            {NAV_LINKS.map(({ key, href, icon: Icon }) => {
               const isActive = pathname === href;
               return (
                 <li key={href}>
@@ -164,7 +174,7 @@ const DashboardNavbar = () => {
                           : "text-gray-400 group-hover:text-primary transition-colors"
                       }
                     />
-                    {name}
+                    {t(`nav.${key}`)}
                   </Link>
                 </li>
               );
@@ -177,7 +187,7 @@ const DashboardNavbar = () => {
             className="mt-6 text-white bg-primary hover:bg-primary/90 duration-300 w-full flex items-center gap-3 rounded-xl py-3.5 px-5 font-semibold transition-transform active:scale-[0.98] shadow-md shadow-primary/20"
           >
             <HiOutlineLogout className="text-xl rotate-180" />
-            Log out
+            {t("nav.logout")}
           </button>
         </aside>
       </div>

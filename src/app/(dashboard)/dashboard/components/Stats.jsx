@@ -1,45 +1,49 @@
+"use client";
+
 import React from "react";
 import { TrendingUp, BarChart3, Box, Users } from "lucide-react";
-
-const STATS_DATA = [
-  {
-    title: "Total revenue",
-    value: "$400",
-    trend: "8.5%",
-    icon: <BarChart3 className="text-[#34d399]" size={28} />,
-    iconBg: "bg-[#ecfdf5]",
-    isUp: true,
-  },
-  {
-    title: "Active tasks",
-    value: "40",
-    trend: "8.5%",
-    icon: <Box className="text-[#fbbf24]" size={28} />,
-    iconBg: "bg-[#fffbeb]",
-    isUp: true,
-  },
-  {
-    title: "Complete task",
-    value: "20",
-    trend: "8.5%",
-    icon: <Box className="text-[#fbbf24]" size={28} />,
-    iconBg: "bg-[#fffbeb]",
-    isUp: true,
-  },
-  {
-    title: "Total users",
-    value: "400",
-    trend: "8.5%",
-    icon: <Users className="text-[#65a30d]" size={28} />,
-    iconBg: "bg-[#f1fadc]",
-    isUp: true,
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const StatsCards = () => {
+  const { t } = useTranslation();
+  const statsData = [
+    {
+      title: t("stats.totalRevenue"),
+      value: "$400",
+      trend: "8.5%",
+      icon: <BarChart3 className="text-[#34d399]" size={28} />,
+      iconBg: "bg-[#ecfdf5]",
+      isUp: true,
+    },
+    {
+      title: t("stats.activeTasks"),
+      value: "40",
+      trend: "8.5%",
+      icon: <Box className="text-[#fbbf24]" size={28} />,
+      iconBg: "bg-[#fffbeb]",
+      isUp: true,
+    },
+    {
+      title: t("stats.completeTask"),
+      value: "20",
+      trend: "8.5%",
+      icon: <Box className="text-[#fbbf24]" size={28} />,
+      iconBg: "bg-[#fffbeb]",
+      isUp: true,
+    },
+    {
+      title: t("stats.totalUsers"),
+      value: "400",
+      trend: "8.5%",
+      icon: <Users className="text-[#65a30d]" size={28} />,
+      iconBg: "bg-[#f1fadc]",
+      isUp: true,
+    },
+  ];
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full h-full pb-4">
-      {STATS_DATA.map((item, index) => (
+      {statsData.map((item, index) => (
         <div
           key={index}
           className="bg-white rounded-4xl p-4 flex flex-col justify-between shadow-sm"
@@ -66,7 +70,7 @@ const StatsCards = () => {
             <TrendingUp className="text-[#22c55e]" size={20} />
             <p className="text-base text-[#64748b]">
               <span className="text-[#22c55e] font-semibold">{item.trend}</span>{" "}
-              Up from yesterday
+              {t("stats.upFromYesterday")}
             </p>
           </div>
         </div>

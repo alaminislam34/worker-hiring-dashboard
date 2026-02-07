@@ -8,14 +8,17 @@ import {
   Loader2,
 } from "lucide-react";
 import CommonTable from "../components/CommonTable";
+import { useTranslation } from "react-i18next";
+import { getPaymentTypeKey } from "@/i18n/utils";
 
 const TransactionHistory = () => {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState("All Payment");
+  const [activeTab, setActiveTab] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 8;
+  const { t } = useTranslation();
 
   useEffect(() => {
     const loadData = async () => {
@@ -34,20 +37,25 @@ const TransactionHistory = () => {
   }, []);
 
   const headers = [
-    { label: "Date", key: "date", sortable: true },
-    { label: "Payment ID", key: "paymentId", sortable: false },
-    { label: "Transaction ID", key: "transactionId", sortable: false },
-    { label: "Name", key: "user", sortable: true },
-    { label: "Type", key: "type", sortable: false },
-    { label: "Amount", key: "amount", sortable: true },
+    { label: t("table.date"), key: "date", sortable: true },
+    { label: t("table.paymentId"), key: "paymentId", sortable: false },
+    { label: t("table.transactionId"), key: "transactionId", sortable: false },
+    { label: t("table.name"), key: "user", sortable: true },
+    { label: t("table.type"), key: "type", sortable: false },
+    { label: t("table.amount"), key: "amount", sortable: true },
+  ];
+
+  const paymentTabs = [
+    { key: "all", label: t("table.allPayment") },
+    { key: "credit", label: t("paymentType.credit") },
+    { key: "debit", label: t("paymentType.debit") },
   ];
 
   // Logic: Combined Tab and Search Filter
   const filteredData = useMemo(() => {
     return transactions.filter((item) => {
       const matchesTab =
-        activeTab === "All Payment" ||
-        item.type.toLowerCase() === activeTab.toLowerCase();
+        activeTab === "all" || getPaymentTypeKey(item.type) === activeTab;
 
       const matchesSearch =
         item.paymentId.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -75,21 +83,21 @@ const TransactionHistory = () => {
     <div className="w-full bg-white rounded-[2.5rem] p-8 shadow-sm border border-gray-50">
       {/* Tab Navigation */}
       <div className="flex gap-8 border-b border-gray-100 mb-6">
-        {["All Payment", "Credit", "Debit"].map((tab) => (
+        {paymentTabs.map((tab) => (
           <button
-            key={tab}
+            key={tab.key}
             onClick={() => {
-              setActiveTab(tab);
+              setActiveTab(tab.key);
               setCurrentPage(1);
             }}
             className={`pb-4 text-base font-bold relative transition-all ${
-              activeTab === tab
+              activeTab === tab.key
                 ? "text-[#73a34f]"
                 : "text-gray-400 hover:text-gray-600"
             }`}
           >
-            {tab}
-            {activeTab === tab && (
+            {tab.label}
+            {activeTab === tab.key && (
               <div className="absolute bottom-0 left-0 w-full h-1 bg-[#73a34f] rounded-full" />
             )}
           </button>
@@ -104,7 +112,7 @@ const TransactionHistory = () => {
         />
         <input
           type="text"
-          placeholder="Search by Payment ID, Name or Transaction ID"
+          placeholder={t("filters.transactionSearch")}
           value={searchQuery}
           onChange={(e) => {
             setSearchQuery(e.target.value);
@@ -120,7 +128,7 @@ const TransactionHistory = () => {
       {/* Pagination Footer */}
       <div className="flex flex-col sm:flex-row justify-between items-center mt-8 gap-4">
         <div className="flex items-center gap-2 text-gray-400 font-bold">
-          <span>Show result:</span>
+          <span>{t("common.showResult")}:</span>
           <div className="flex items-center gap-2 px-3 py-1.5 border border-gray-100 rounded-lg text-black bg-white font-bold">
             {rowsPerPage} <ChevronDown size={14} />
           </div>

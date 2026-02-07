@@ -9,16 +9,19 @@ import {
 } from "lucide-react";
 import CommonTable from "../components/CommonTable";
 import PaymentModal from "../components/PaymentModal";
+import { useTranslation } from "react-i18next";
+import { getOrderStatusKey } from "@/i18n/utils";
 
 const OrderManagement = () => {
   const [ordersData, setOrdersData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState("All Orders");
+  const [activeTab, setActiveTab] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedWorker, setSelectedWorker] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const rowsPerPage = 8;
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetch("/data.json")
@@ -31,19 +34,27 @@ const OrderManagement = () => {
   }, []);
 
   const headers = [
-    { label: "All Orders", key: "order", sortable: true },
-    { label: "Date", key: "date", sortable: true },
-    { label: "Buyer", key: "buyer", sortable: false },
-    { label: "Payment", key: "payment", sortable: false },
-    { label: "Worker", key: "worker", sortable: false },
-    { label: "Status", key: "status", sortable: false },
-    { label: "Budget", key: "budget", sortable: true },
+    { label: t("table.allOrders"), key: "order", sortable: true },
+    { label: t("table.date"), key: "date", sortable: true },
+    { label: t("table.buyer"), key: "buyer", sortable: false },
+    { label: t("table.payment"), key: "payment", sortable: false },
+    { label: t("table.worker"), key: "worker", sortable: false },
+    { label: t("table.status"), key: "status", sortable: false },
+    { label: t("table.budget"), key: "budget", sortable: true },
+  ];
+
+  const orderTabs = [
+    { key: "all", label: t("table.allOrders") },
+    { key: "accepted", label: t("status.accepted") },
+    { key: "confirmed", label: t("status.confirmed") },
+    { key: "progress", label: t("status.progress") },
+    { key: "completed", label: t("status.completed") },
   ];
 
   const filteredData = useMemo(() => {
     return ordersData.filter((item) => {
       const matchesTab =
-        activeTab === "All Orders" || item.status === activeTab;
+        activeTab === "all" || getOrderStatusKey(item.status) === activeTab;
       const matchesSearch =
         item.order.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.order.id.toLowerCase().includes(searchQuery.toLowerCase());
@@ -57,7 +68,7 @@ const OrderManagement = () => {
   }, [filteredData, currentPage]);
 
   const handleConfirmPayment = (id, txId) => {
-    alert(`Payment Sent!\nOrder: ${id}\nTXID: ${txId}`);
+    alert(t("alerts.paymentSent", { orderId: id, txId }));
     // Update local state to reflect payment
     setOrdersData((prev) =>
       prev.map((order) =>
@@ -78,27 +89,27 @@ const OrderManagement = () => {
   return (
     <div className="w-full bg-white rounded-[2.5rem] p-8 shadow-sm border border-gray-50 min-h-150 relative">
       <div className="flex gap-8 border-b border-gray-100 mb-6 overflow-x-auto scrollbar-hide">
-        {["All Orders", "Accepted", "Confirmed", "Progress", "Completed"].map(
-          (tab) => (
+        {orderTabs.map((tab) => (
             <button
-              key={tab}
+              key={tab.key}
               onClick={() => {
-                setActiveTab(tab);
+                setActiveTab(tab.key);
                 setCurrentPage(1);
               }}
-              className={`pb-4 text-base font-bold transition-all relative whitespace-nowrap ${activeTab === tab ? "text-[#73a34f]" : "text-gray-400"}`}
+              className={`pb-4 text-base font-bold transition-all relative whitespace-nowrap ${activeTab === tab.key ? "text-[#73a34f]" : "text-gray-400"}`}
             >
-              {tab} (
-              {tab === "All Orders"
+              {tab.label} (
+              {tab.key === "all"
                 ? ordersData.length
-                : ordersData.filter((d) => d.status === tab).length}
+                : ordersData.filter((d) =>
+                    getOrderStatusKey(d.status) === tab.key,
+                  ).length}
               )
-              {activeTab === tab && (
+              {activeTab === tab.key && (
                 <div className="absolute bottom-0 left-0 w-full h-1 bg-[#73a34f] rounded-full" />
               )}
             </button>
-          ),
-        )}
+        ))}
       </div>
 
       <div className="relative mb-8">
@@ -108,7 +119,7 @@ const OrderManagement = () => {
         />
         <input
           type="text"
-          placeholder="Search by Order Title or ID"
+          placeholder={t("filters.orderSearch")}
           value={searchQuery}
           onChange={(e) => {
             setSearchQuery(e.target.value);
@@ -129,7 +140,7 @@ const OrderManagement = () => {
 
       <div className="flex justify-between items-center mt-8">
         <div className="flex items-center gap-2 text-gray-400 font-bold">
-          Show result:{" "}
+          {t("common.showResult")}: {" "}
           <span className="bg-gray-50 px-3 py-1 rounded-lg text-black border border-gray-100 flex items-center gap-1">
             8 <ChevronDown size={14} />
           </span>

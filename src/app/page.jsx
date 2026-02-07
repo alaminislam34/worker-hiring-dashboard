@@ -2,9 +2,11 @@
 
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 const WelcomeSimple = () => {
   const router = useRouter();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -18,10 +20,13 @@ const WelcomeSimple = () => {
     <div className="flex items-center justify-center h-screen text-center">
       <div className="py-6">
         <h1 className="text-3xl font-bold text-dark">
-          Welcome to <span className="text-[#33B1E5]">Admin Dashboard</span>
+          {t("welcome.title")} {" "}
+          <span className="text-[#33B1E5]">
+            {t("brand.adminDashboard")}
+          </span>
         </h1>
         <p className="text-gray-500 mt-2">
-          Manage your store, blogs, and settings all in one place.
+          {t("welcome.subtitle")}
         </p>
       </div>
     </div>

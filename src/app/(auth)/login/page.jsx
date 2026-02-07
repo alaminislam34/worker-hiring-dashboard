@@ -5,13 +5,15 @@ import { Mail, Lock } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const LoginPage = () => {
   const router = useRouter();
+  const { t } = useTranslation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    toast.success("Logged in successfully!");
+    toast.success(t("auth.loggedInSuccess"));
     setTimeout(() => {
       router.push("/dashboard");
     }, 500);
@@ -24,21 +26,21 @@ const LoginPage = () => {
           <span className="text-black text-3xl font-bold">帮</span>
         </div>
         <h1 className="text-[#4b4b4b] text-3xl font-semibold tracking-tight">
-          Admin Dashboard
+          {t("brand.adminDashboard")}
         </h1>
       </div>
 
       {/* Login Card */}
       <div className="w-full max-w-120 mx-auto bg-white rounded-[2.5rem] p-8 md:p-12 shadow-xl">
         <h2 className="text-center text-[28px] font-medium text-gray-900 mb-10">
-          Welcome back
+          {t("auth.welcomeBack")}
         </h2>
 
         <form className="space-y-6" onSubmit={handleSubmit}>
           {/* Email Field */}
           <div className="space-y-2">
             <label className="text-lg font-medium text-gray-800 ml-1">
-              Email address
+              {t("auth.emailAddress")}
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -46,7 +48,7 @@ const LoginPage = () => {
               </div>
               <input
                 type="email"
-                placeholder="Enter your email"
+                placeholder={t("auth.enterEmail")}
                 className="block w-full pl-12 pr-4 py-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#73a34f] focus:border-transparent outline-none transition-all placeholder:text-gray-300 text-gray-600"
               />
             </div>
@@ -55,7 +57,7 @@ const LoginPage = () => {
           {/* Password Field */}
           <div className="space-y-2">
             <label className="text-lg font-medium text-gray-800 ml-1">
-              Password
+              {t("auth.password")}
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -63,7 +65,7 @@ const LoginPage = () => {
               </div>
               <input
                 type="password"
-                placeholder="Enter your password"
+                placeholder={t("auth.enterPassword")}
                 className="block w-full pl-12 pr-4 py-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#73a34f] focus:border-transparent outline-none transition-all placeholder:text-gray-300 text-gray-600"
               />
             </div>
@@ -75,7 +77,7 @@ const LoginPage = () => {
               href={"/login/forget"}
               className="text-[#73a34f] font-semibold text-lg hover:underline"
             >
-              Forget password?
+              {t("auth.forgotPassword")}
             </Link>
           </div>
 
@@ -84,7 +86,7 @@ const LoginPage = () => {
             type="submit"
             className="w-full bg-[#73a34f] hover:bg-[#628b43] text-white font-medium py-4 rounded-2xl text-xl mt-4 transition-colors duration-200"
           >
-            Login
+            {t("auth.login")}
           </button>
         </form>
       </div>

@@ -8,6 +8,7 @@ import {
   Loader2,
 } from "lucide-react";
 import CommonTable from "../components/CommonTable";
+import { useTranslation } from "react-i18next";
 
 const WorkerManagement = () => {
   const [workersData, setWorkersData] = useState([]);
@@ -15,6 +16,7 @@ const WorkerManagement = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 8;
+  const { t } = useTranslation();
 
   useEffect(() => {
     const loadWorkers = async () => {
@@ -33,10 +35,10 @@ const WorkerManagement = () => {
   }, []);
 
   const headers = [
-    { label: "Name", key: "worker", sortable: true },
-    { label: "Email", key: "email", sortable: false },
-    { label: "Phone number", key: "phone", sortable: false },
-    { label: "Location", key: "location", sortable: false },
+    { label: t("table.name"), key: "worker", sortable: true },
+    { label: t("table.email"), key: "email", sortable: false },
+    { label: t("table.phoneNumber"), key: "phone", sortable: false },
+    { label: t("table.location"), key: "location", sortable: false },
   ];
 
   const filteredData = useMemo(() => {
@@ -72,7 +74,7 @@ const WorkerManagement = () => {
         />
         <input
           type="text"
-          placeholder="Search workers by name, email, or location"
+          placeholder={t("filters.workerSearch")}
           value={searchQuery}
           onChange={(e) => {
             setSearchQuery(e.target.value);
@@ -88,7 +90,7 @@ const WorkerManagement = () => {
       {/* 3. Standardized Pagination Footer */}
       <div className="flex flex-col sm:flex-row justify-between items-center mt-8 gap-4">
         <div className="flex items-center gap-2 text-gray-400 font-bold">
-          <span>Show result:</span>
+          <span>{t("common.showResult")}:</span>
           <div className="flex items-center gap-2 px-3 py-1.5 border border-gray-100 rounded-lg text-black bg-white">
             {rowsPerPage} <ChevronDown size={14} />
           </div>

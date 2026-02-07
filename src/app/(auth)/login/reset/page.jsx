@@ -1,14 +1,16 @@
 "use client";
 import React from "react";
-import { Mail, Lock } from "lucide-react";
+import { Lock } from "lucide-react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const SetPassword = () => {
   const router = useRouter();
+  const { t } = useTranslation();
   const handleSubmit = (e) => {
     e.preventDefault();
-    toast.success("Password reset successfully!");
+    toast.success(t("auth.passwordResetSuccess"));
     setTimeout(() => {
       router.push("/login");
     }, 500);
@@ -22,21 +24,21 @@ const SetPassword = () => {
           <span className="text-black text-3xl font-bold">帮</span>
         </div>
         <h1 className="text-[#4b4b4b] text-3xl font-semibold tracking-tight">
-          Admin Dashboard
+          {t("brand.adminDashboard")}
         </h1>
       </div>
 
       {/* Login Card */}
       <div className="w-full max-w-120 mx-auto bg-white rounded-[2.5rem] p-8 md:p-12 shadow-xl">
         <h2 className="text-center text-[28px] font-medium text-gray-900 mb-10">
-          Forget Password
+          {t("auth.resetTitle")}
         </h2>
 
         <form className="space-y-6" onSubmit={handleSubmit}>
           {/* Password Field */}
           <div className="space-y-2">
             <label className="text-lg font-medium text-gray-800 ml-1">
-              New Password
+              {t("auth.newPassword")}
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -44,7 +46,7 @@ const SetPassword = () => {
               </div>
               <input
                 type="password"
-                placeholder="Enter your new password"
+                placeholder={t("auth.enterNewPassword")}
                 className="block w-full pl-12 pr-4 py-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#73a34f] focus:border-transparent outline-none transition-all placeholder:text-gray-300 text-gray-600"
               />
             </div>
@@ -53,7 +55,7 @@ const SetPassword = () => {
           {/* Password Field */}
           <div className="space-y-2">
             <label className="text-lg font-medium text-gray-800 ml-1">
-              Confirm Password
+              {t("auth.confirmPassword")}
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -61,7 +63,7 @@ const SetPassword = () => {
               </div>
               <input
                 type="password"
-                placeholder="Confirm your password"
+                placeholder={t("auth.confirmYourPassword")}
                 className="block w-full pl-12 pr-4 py-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#73a34f] focus:border-transparent outline-none transition-all placeholder:text-gray-300 text-gray-600"
               />
             </div>
@@ -72,7 +74,7 @@ const SetPassword = () => {
             type="submit"
             className="w-full bg-[#73a34f] hover:bg-[#628b43] text-white font-medium py-4 rounded-2xl text-xl mt-4 transition-colors duration-200"
           >
-            Reset Password
+            {t("auth.resetPassword")}
           </button>
         </form>
       </div>

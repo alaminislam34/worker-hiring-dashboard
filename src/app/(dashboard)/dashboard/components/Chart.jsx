@@ -13,6 +13,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { ChevronDown } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 // Register ChartJS modules
 ChartJS.register(
@@ -27,28 +28,19 @@ ChartJS.register(
 );
 
 const OrderChart = () => {
-  // Mock data to match your design peaks
-  const labels = [
-    "06 Jan",
-    "07 Jan",
-    "08 Jan",
-    "09 Jan",
-    "10 Jan",
-    "11 Jan",
-    "12 Jan",
-    "13 Jan",
-    "14 Jan",
-    "15 Jan",
-    "16 Jan",
-    "17 Jan",
-  ];
+  const { t } = useTranslation();
+  const shortLabels = t("chart.shortLabels", { returnObjects: true });
+  const longLabels = t("chart.longLabels", { returnObjects: true });
+  const labels = Array.isArray(shortLabels) ? shortLabels : [];
+  const axisLabels = Array.isArray(longLabels) ? longLabels : [];
 
+  // Mock data to match your design peaks
   const data = {
     labels,
     datasets: [
       {
         fill: true,
-        label: "Orders",
+        label: t("chart.ordersLabel"),
         // Trying to match the wave pattern in your image
         data: [
           100, 150, 240, 160, 430, 180, 260, 210, 310, 120, 160, 140, 360, 220,
@@ -115,15 +107,21 @@ const OrderChart = () => {
       {/* Header Section */}
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h2 className="text-xl font-bold text-gray-800">Order</h2>
+          <h2 className="text-xl font-bold text-gray-800">
+            {t("chart.title")}
+          </h2>
           <div className="flex gap-4 mt-1 text-sm text-gray-400">
-            <span className="cursor-pointer hover:text-gray-600">XIL</span>
-            <span className="cursor-pointer hover:text-gray-600">Gante</span>
+            <span className="cursor-pointer hover:text-gray-600">
+              {t("chart.sources.xil")}
+            </span>
+            <span className="cursor-pointer hover:text-gray-600">
+              {t("chart.sources.gante")}
+            </span>
           </div>
         </div>
 
         <button className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-xl text-sm text-gray-500 hover:bg-gray-50 transition-all">
-          October <ChevronDown size={16} />
+          {t("chart.month")} <ChevronDown size={16} />
         </button>
       </div>
 
@@ -134,12 +132,9 @@ const OrderChart = () => {
 
       {/* X-Axis Custom Date Labels */}
       <div className="flex justify-between mt-4 px-2 text-[10px] md:text-xs text-gray-400 font-medium">
-        <span>06 Jan, 2026</span>
-        <span>08 Jan, 2026</span>
-        <span>10 Jan, 2026</span>
-        <span>12 Jan, 2026</span>
-        <span>14 Jan, 2026</span>
-        <span>16 Jan, 2026</span>
+        {axisLabels.map((label) => (
+          <span key={label}>{label}</span>
+        ))}
       </div>
     </div>
   );

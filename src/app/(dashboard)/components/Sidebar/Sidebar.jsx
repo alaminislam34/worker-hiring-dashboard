@@ -10,34 +10,35 @@ import { BsFillGrid1X2Fill } from "react-icons/bs";
 import { FaUser } from "react-icons/fa6";
 import { FaUserTie } from "react-icons/fa6";
 import { BsCreditCardFill } from "react-icons/bs";
+import { useTranslation } from "react-i18next";
 
 const SIDELINKS = [
   {
-    name: "Dashboard",
+    key: "dashboard",
     icon: <BsFillGrid1X2Fill className="text-2xl p-1" />,
     href: "/dashboard",
     match: (path) => path === "/dashboard" || /^\/dashboard\/\d+$/.test(path),
   },
   {
-    name: "Order",
+    key: "order",
     icon: <IoMdListBox className="text-2xl" />,
     href: "/dashboard/order",
     match: (path) => path.startsWith("/dashboard/order"),
   },
   {
-    name: "Buyer",
+    key: "buyer",
     icon: <FaUser className="text-2xl p-0.5" />,
     href: "/dashboard/buyer",
     match: (path) => path.startsWith("/dashboard/buyer"),
   },
   {
-    name: "Worker",
+    key: "worker",
     icon: <FaUserTie className="text-2xl p-0.5" />,
     href: "/dashboard/worker",
     match: (path) => path.startsWith("/dashboard/worker"),
   },
   {
-    name: "Payment",
+    key: "payment",
     icon: <BsCreditCardFill className="text-2xl p-0.5" />,
     href: "/dashboard/payment",
     match: (path) => path.startsWith("/dashboard/payment"),
@@ -46,6 +47,7 @@ const SIDELINKS = [
 
 const Sidebar = () => {
   const pathname = usePathname();
+  const { t } = useTranslation();
 
   return (
     <aside className="fixed left-0 top-0 min-h-200 overflow-y-auto h-screen lg:w-67 xl:w-77">
@@ -59,7 +61,7 @@ const Sidebar = () => {
               </div>
 
               <h2 className="text-sm md:text-base text-slate-900 truncate">
-                Admin Dashboard
+                {t("brand.adminDashboard")}
               </h2>
             </div>
 
@@ -88,7 +90,7 @@ const Sidebar = () => {
                         >
                           {link.icon}
                         </span>
-                        {link.name}
+                        {t(`nav.${link.key}`)}
                       </Link>
                     </li>
                   );
@@ -99,7 +101,7 @@ const Sidebar = () => {
 
           <button className="flex items-center gap-4 w-full px-5 py-3 mt-auto font-semibold text-white transition-all rounded-xl bg-primary hover:bg-primary hover:shadow-lg active:scale-95 group">
             <HiOutlineLogout className="text-xl transition-transform group-hover:translate-x-1" />
-            <span>Log out</span>
+            <span>{t("nav.logout")}</span>
           </button>
         </div>
       </div>

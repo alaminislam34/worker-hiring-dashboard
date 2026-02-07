@@ -2,8 +2,16 @@
 import React from "react";
 import Image from "next/image";
 import { ArrowUpDown } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import {
+  getOrderStatusKey,
+  getPaymentStatusKey,
+  getPaymentTypeKey,
+} from "@/i18n/utils";
 
 const CommonTable = ({ headers, data, onAction }) => {
+  const { t } = useTranslation();
+
   const renderCell = (key, value, row) => {
     // 1. Handle User-style cells (Avatar + Name) for Buyer, Worker, and Transaction pages
     //
@@ -40,11 +48,19 @@ const CommonTable = ({ headers, data, onAction }) => {
       case "payment":
       case "status":
       case "type": // Added "type" for Credit/Debit badges
-        const val = value?.toLowerCase();
-        const isCompleted = ["completed", "paid", "credit"].includes(val);
-        const isAccepted = val === "accepted";
-        const isProgress = val === "progress";
-        const isDebit = val === "debit";
+        const badgeKey =
+          key === "status"
+            ? getOrderStatusKey(value)
+            : key === "payment"
+              ? getPaymentStatusKey(value)
+              : getPaymentTypeKey(value);
+
+        const isCompleted = ["completed", "paid", "credit"].includes(
+          badgeKey,
+        );
+        const isAccepted = badgeKey === "accepted";
+        const isProgress = badgeKey === "progress";
+        const isDebit = badgeKey === "debit";
 
         let colors = "bg-gray-100 text-gray-500";
         if (isCompleted) colors = "bg-[#ecfdf5] text-[#10b981]"; // Green
@@ -52,17 +68,27 @@ const CommonTable = ({ headers, data, onAction }) => {
         if (isProgress) colors = "bg-[#fff7ed] text-[#ea580c]"; // Orange
         if (isDebit) colors = "bg-red-50 text-red-500"; // Red for Debit
 
+        const badgeLabel =
+          key === "status"
+            ? t(`status.${badgeKey}`, { defaultValue: value })
+            : key === "payment"
+              ? t(`paymentStatus.${badgeKey}`, { defaultValue: value })
+              : t(`paymentType.${badgeKey}`, { defaultValue: value });
+
         return (
           <span
             className={`px-4 py-2 rounded-lg text-sm font-semibold inline-block ${colors}`}
           >
-            {value}
+            {badgeLabel}
           </span>
         );
 
       case "budget":
       case "amount": // Handles both Order budget and Transaction amount
-        const isPaid = row.status === "Completed" || row.payment === "Paid";
+        const orderStatusKey = getOrderStatusKey(row.status);
+        const paymentStatusKey = getPaymentStatusKey(row.payment);
+        const isPaid =
+          orderStatusKey === "completed" || paymentStatusKey === "paid";
 
         // Show Pay Button only for unpaid orders in Order Management
         if (key === "budget" && !isPaid) {
@@ -71,7 +97,7 @@ const CommonTable = ({ headers, data, onAction }) => {
               onClick={() => onAction && onAction(row)}
               className="bg-[#262626] hover:bg-black text-white px-6 py-2.5 rounded-xl font-bold transition-all active:scale-95"
             >
-              Pay ${value}
+              {t("actions.payAmount", { amount: value })}
             </button>
           );
         }

@@ -1,0 +1,164 @@
+{
+  "app": {
+    "title": "工人雇用仪表板",
+    "description": "通过此应用顺畅且专业地找到您的导师或学生。"
+  },
+  "brand": {
+    "adminDashboard": "管理后台"
+  },
+  "welcome": {
+    "title": "欢迎来到",
+    "subtitle": "在一个地方管理您的商店、博客和设置。"
+  },
+  "nav": {
+    "dashboard": "仪表板",
+    "order": "订单",
+    "buyer": "买家",
+    "worker": "工人",
+    "payment": "支付",
+    "management": "管理",
+    "logout": "退出登录",
+    "admin": "管理员"
+  },
+  "language": {
+    "english": "英语",
+    "chinese": "中文"
+  },
+  "a11y": {
+    "openMenu": "打开菜单",
+    "userAvatar": "用户头像",
+    "englishFlag": "英国国旗",
+    "chineseFlag": "中国国旗"
+  },
+  "table": {
+    "allOrders": "全部订单",
+    "allPayment": "全部支付",
+    "date": "日期",
+    "buyer": "买家",
+    "payment": "支付",
+    "worker": "工人",
+    "status": "状态",
+    "budget": "预算",
+    "name": "姓名",
+    "email": "电子邮件",
+    "phoneNumber": "电话号码",
+    "location": "位置",
+    "paymentId": "支付ID",
+    "transactionId": "交易ID",
+    "type": "类型",
+    "amount": "金额"
+  },
+  "filters": {
+    "search": "搜索",
+    "orderSearch": "按订单标题或ID搜索",
+    "workerSearch": "按姓名、邮箱或位置搜索工人",
+    "transactionSearch": "按支付ID、姓名或交易ID搜索"
+  },
+  "actions": {
+    "payAmount": "支付 ${{amount}}"
+  },
+  "stats": {
+    "totalRevenue": "总收入",
+    "activeTasks": "活跃任务",
+    "completeTask": "完成任务",
+    "totalUsers": "总用户",
+    "upFromYesterday": "较昨日上升"
+  },
+  "chart": {
+    "title": "订单",
+    "ordersLabel": "订单",
+    "sources": {
+      "xil": "XIL",
+      "gante": "Gante"
+    },
+    "month": "十月",
+    "shortLabels": [
+      "1月06日",
+      "1月07日",
+      "1月08日",
+      "1月09日",
+      "1月10日",
+      "1月11日",
+      "1月12日",
+      "1月13日",
+      "1月14日",
+      "1月15日",
+      "1月16日",
+      "1月17日"
+    ],
+    "longLabels": [
+      "2026年1月06日",
+      "2026年1月08日",
+      "2026年1月10日",
+      "2026年1月12日",
+      "2026年1月14日",
+      "2026年1月16日"
+    ]
+  },
+  "order": {
+    "payWorker": "给工人付款"
+  },
+  "paymentModal": {
+    "title": "支付窗口",
+    "accountHolderName": "收款人姓名",
+    "bankName": "银行名称",
+    "bankValue": "Payoneer",
+    "accountNumber": "账号",
+    "accountValue": "410 2150 5546 2015",
+    "transactionId": "交易ID",
+    "transactionPlaceholder": "输入交易ID"
+  },
+  "notifications": {
+    "title": "通知",
+    "paymentCompletedBody": "已完成 {{amount}} 的付款，订单为“{{order}}”。",
+    "time": "今天 9:12 AM"
+  },
+  "auth": {
+    "welcomeBack": "欢迎回来",
+    "emailAddress": "邮箱地址",
+    "password": "密码",
+    "forgotPassword": "忘记密码？",
+    "login": "登录",
+    "enterEmail": "输入您的邮箱",
+    "enterPassword": "输入您的密码",
+    "forgetPasswordTitle": "忘记密码",
+    "sendLink": "发送链接",
+    "resetTitle": "重置密码",
+    "newPassword": "新密码",
+    "confirmPassword": "确认密码",
+    "enterNewPassword": "输入新密码",
+    "confirmYourPassword": "确认您的密码",
+    "resetPassword": "重置密码",
+    "loggedInSuccess": "登录成功！",
+    "passwordResetLinkSent": "密码重置链接已发送到您的邮箱！",
+    "passwordResetSuccess": "密码重置成功！"
+  },
+  "alerts": {
+    "paymentSent": "付款已发送！\n订单：{{orderId}}\n交易ID：{{txId}}"
+  },
+  "sample": {
+    "assembleIkeaDesk": "组装一张IKEA桌子",
+    "assembleIkeaDeskShort": "组装IKEA桌子"
+  },
+  "status": {
+    "accepted": "已接受",
+    "confirmed": "已确认",
+    "progress": "进行中",
+    "completed": "已完成",
+    "unknown": "未知"
+  },
+  "paymentStatus": {
+    "paid": "已支付",
+    "pending": "待支付",
+    "unpaid": "未支付",
+    "unknown": "未知"
+  },
+  "paymentType": {
+    "credit": "收入",
+    "debit": "支出",
+    "unknown": "未知"
+  },
+  "common": {
+    "showResult": "显示结果"
+  }
+}

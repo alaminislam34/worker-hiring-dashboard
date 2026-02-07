@@ -8,6 +8,7 @@ import {
   Loader2,
 } from "lucide-react";
 import CommonTable from "../components/CommonTable";
+import { useTranslation } from "react-i18next";
 
 const BuyerManagement = () => {
   const [buyersData, setBuyersData] = useState([]);
@@ -15,6 +16,7 @@ const BuyerManagement = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 8;
+  const { t } = useTranslation();
 
   // Simulate Fetching Data
   useEffect(() => {
@@ -36,10 +38,10 @@ const BuyerManagement = () => {
 
   // Table Headers
   const headers = [
-    { label: "Name", key: "buyer", sortable: true },
-    { label: "Email", key: "email", sortable: false },
-    { label: "Phone number", key: "phone", sortable: false },
-    { label: "Location", key: "location", sortable: false },
+    { label: t("table.name"), key: "buyer", sortable: true },
+    { label: t("table.email"), key: "email", sortable: false },
+    { label: t("table.phoneNumber"), key: "phone", sortable: false },
+    { label: t("table.location"), key: "location", sortable: false },
   ];
 
   // Search Logic
@@ -75,7 +77,7 @@ const BuyerManagement = () => {
         />
         <input
           type="text"
-          placeholder="Search"
+          placeholder={t("filters.search")}
           value={searchQuery}
           onChange={(e) => {
             setSearchQuery(e.target.value);
@@ -91,7 +93,7 @@ const BuyerManagement = () => {
       {/* Pagination Footer */}
       <div className="flex flex-col sm:flex-row justify-between items-center mt-8 gap-4">
         <div className="flex items-center gap-2 text-gray-400 font-bold">
-          <span>Show result:</span>
+          <span>{t("common.showResult")}:</span>
           <div className="flex items-center gap-2 px-3 py-1.5 border border-gray-100 rounded-lg text-black bg-white">
             {rowsPerPage} <ChevronDown size={14} />
           </div>

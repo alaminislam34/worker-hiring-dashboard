@@ -1,8 +1,16 @@
 "use client";
 import Image from "next/image";
 import { X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const NotificationDrawer = ({ isOpen, setIsOpen }) => {
+  const { t } = useTranslation();
+  const notificationName = "Justin leo";
+  const notificationMessage = t("notifications.paymentCompletedBody", {
+    amount: "$90",
+    order: t("sample.assembleIkeaDeskShort"),
+  });
+
   return (
     <div
       className={`absolute inset-0 z-50 transition-all duration-500 ease-in-out flex justify-end
@@ -21,7 +29,9 @@ const NotificationDrawer = ({ isOpen, setIsOpen }) => {
           ${isOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-xl font-semibold text-gray-500">Notification</h2>
+          <h2 className="text-xl font-semibold text-gray-500">
+            {t("notifications.title")}
+          </h2>
           <button
             onClick={() => setIsOpen(false)}
             className="text-gray-400 hover:text-black transition-colors"
@@ -40,17 +50,21 @@ const NotificationDrawer = ({ isOpen, setIsOpen }) => {
                   <Image
                     src="/images/user.jpg"
                     fill
-                    alt="User"
+                    alt={t("a11y.userAvatar")}
                     className="rounded-full object-cover border border-gray-100"
                     unoptimized
                   />
                 </div>
                 <div className="flex flex-col gap-0.5">
                   <p className="text-sm text-gray-800 leading-snug">
-                    <span className="font-bold text-black">Justin leo</span>{" "}
-                    payment of $90 was completed for "Assemble IKEA Desk."
+                    <span className="font-bold text-black">
+                      {notificationName}
+                    </span>{" "}
+                    {notificationMessage}
                   </p>
-                  <span className="text-gray-400 text-xs">Today, 9:12 AM</span>
+                  <span className="text-gray-400 text-xs">
+                    {t("notifications.time")}
+                  </span>
                 </div>
               </div>
             ))}

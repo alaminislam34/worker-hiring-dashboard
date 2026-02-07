@@ -1,0 +1,164 @@
+{
+  "app": {
+    "title": "Worker Hiring Dashboard",
+    "description": "Find your tutor or student through this app smoothly and professionally."
+  },
+  "brand": {
+    "adminDashboard": "Admin Dashboard"
+  },
+  "welcome": {
+    "title": "Welcome to",
+    "subtitle": "Manage your store, blogs, and settings all in one place."
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "order": "Order",
+    "buyer": "Buyer",
+    "worker": "Worker",
+    "payment": "Payment",
+    "management": "Management",
+    "logout": "Log out",
+    "admin": "Admin"
+  },
+  "language": {
+    "english": "English",
+    "chinese": "Chinese"
+  },
+  "a11y": {
+    "openMenu": "Open Menu",
+    "userAvatar": "User Avatar",
+    "englishFlag": "England Flag",
+    "chineseFlag": "China Flag"
+  },
+  "table": {
+    "allOrders": "All Orders",
+    "allPayment": "All Payment",
+    "date": "Date",
+    "buyer": "Buyer",
+    "payment": "Payment",
+    "worker": "Worker",
+    "status": "Status",
+    "budget": "Budget",
+    "name": "Name",
+    "email": "Email",
+    "phoneNumber": "Phone number",
+    "location": "Location",
+    "paymentId": "Payment ID",
+    "transactionId": "Transaction ID",
+    "type": "Type",
+    "amount": "Amount"
+  },
+  "filters": {
+    "search": "Search",
+    "orderSearch": "Search by Order Title or ID",
+    "workerSearch": "Search workers by name, email, or location",
+    "transactionSearch": "Search by Payment ID, Name or Transaction ID"
+  },
+  "actions": {
+    "payAmount": "Pay ${{amount}}"
+  },
+  "stats": {
+    "totalRevenue": "Total revenue",
+    "activeTasks": "Active tasks",
+    "completeTask": "Complete task",
+    "totalUsers": "Total users",
+    "upFromYesterday": "Up from yesterday"
+  },
+  "chart": {
+    "title": "Order",
+    "ordersLabel": "Orders",
+    "sources": {
+      "xil": "XIL",
+      "gante": "Gante"
+    },
+    "month": "October",
+    "shortLabels": [
+      "06 Jan",
+      "07 Jan",
+      "08 Jan",
+      "09 Jan",
+      "10 Jan",
+      "11 Jan",
+      "12 Jan",
+      "13 Jan",
+      "14 Jan",
+      "15 Jan",
+      "16 Jan",
+      "17 Jan"
+    ],
+    "longLabels": [
+      "06 Jan, 2026",
+      "08 Jan, 2026",
+      "10 Jan, 2026",
+      "12 Jan, 2026",
+      "14 Jan, 2026",
+      "16 Jan, 2026"
+    ]
+  },
+  "order": {
+    "payWorker": "Pay worker"
+  },
+  "paymentModal": {
+    "title": "Payment Modal",
+    "accountHolderName": "Account holder name",
+    "bankName": "Bank Name",
+    "bankValue": "Payoneer",
+    "accountNumber": "Account Number",
+    "accountValue": "410 2150 5546 2015",
+    "transactionId": "Transaction ID",
+    "transactionPlaceholder": "Enter Transaction Id"
+  },
+  "notifications": {
+    "title": "Notification",
+    "paymentCompletedBody": "payment of {{amount}} was completed for \"{{order}}.\"",
+    "time": "Today, 9:12 AM"
+  },
+  "auth": {
+    "welcomeBack": "Welcome back",
+    "emailAddress": "Email address",
+    "password": "Password",
+    "forgotPassword": "Forget password?",
+    "login": "Login",
+    "enterEmail": "Enter your email",
+    "enterPassword": "Enter your password",
+    "forgetPasswordTitle": "Forget Password",
+    "sendLink": "Send me the link",
+    "resetTitle": "Reset Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "enterNewPassword": "Enter your new password",
+    "confirmYourPassword": "Confirm your password",
+    "resetPassword": "Reset Password",
+    "loggedInSuccess": "Logged in successfully!",
+    "passwordResetLinkSent": "Password reset link sent to your email!",
+    "passwordResetSuccess": "Password reset successfully!"
+  },
+  "alerts": {
+    "paymentSent": "Payment Sent!\nOrder: {{orderId}}\nTXID: {{txId}}"
+  },
+  "sample": {
+    "assembleIkeaDesk": "Assemble an IKEA Desk",
+    "assembleIkeaDeskShort": "Assemble IKEA Desk"
+  },
+  "status": {
+    "accepted": "Accepted",
+    "confirmed": "Confirmed",
+    "progress": "In Progress",
+    "completed": "Completed",
+    "unknown": "Unknown"
+  },
+  "paymentStatus": {
+    "paid": "Paid",
+    "pending": "Pending",
+    "unpaid": "Unpaid",
+    "unknown": "Unknown"
+  },
+  "paymentType": {
+    "credit": "Credit",
+    "debit": "Debit",
+    "unknown": "Unknown"
+  },
+  "common": {
+    "showResult": "Show result"
+  }
+}
