@@ -1,0 +1,42 @@
+[
+  {
+    "id": "w1",
+    "worker": {
+      "name": "Alex Smith",
+      "avatar": "https://i.pravatar.cc/150?u=alex"
+    },
+    "email": "alexsmith@gmail.com",
+    "phone": "+1 887 049 8937",
+    "location": "Montreal, Quebec"
+  },
+  {
+    "id": "w2",
+    "worker": {
+      "name": "Jordan Reed",
+      "avatar": "https://i.pravatar.cc/150?u=jordan"
+    },
+    "email": "j.reed@gmail.com",
+    "phone": "+1 887 049 2233",
+    "location": "Toronto, Ontario"
+  },
+  {
+    "id": "w3",
+    "worker": {
+      "name": "Sam Wilson",
+      "avatar": "https://i.pravatar.cc/150?u=sam"
+    },
+    "email": "sam.w@outlook.com",
+    "phone": "+1 887 049 5566",
+    "location": "Vancouver, BC"
+  },
+  {
+    "id": "w4",
+    "worker": {
+      "name": "Taylor Otwell",
+      "avatar": "https://i.pravatar.cc/150?u=taylor"
+    },
+    "email": "taylor@laravel.com",
+    "phone": "+1 887 049 7788",
+    "location": "New York, NY"
+  }
+]

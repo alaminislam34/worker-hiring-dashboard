@@ -1,0 +1,18 @@
+[
+  {
+    "date": "Apr 24, 2022",
+    "paymentId": "PAY-849372",
+    "transactionId": "TRX-240124-5839",
+    "user": { "name": "Justin Leo", "avatar": "https://i.pravatar.cc/150?u=1" },
+    "type": "Credit",
+    "amount": "$90"
+  },
+  {
+    "date": "Apr 24, 2022",
+    "paymentId": "PAY-849372",
+    "transactionId": "TRX-240124-5839",
+    "user": { "name": "Alex smith", "avatar": "https://i.pravatar.cc/150?u=alex" },
+    "type": "Debit",
+    "amount": "-$79.02"
+  }
+]
