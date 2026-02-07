@@ -1,0 +1,102 @@
+[
+  {
+    "id": "1",
+    "buyer": {
+      "name": "Justin Leo",
+      "avatar": "https://i.pravatar.cc/150?u=1"
+    },
+    "email": "justin.leo@gmail.com",
+    "phone": "+1 887 049 8937",
+    "location": "Montreal, Quebec"
+  },
+  {
+    "id": "2",
+    "buyer": {
+      "name": "Sarah Jenkins",
+      "avatar": "https://i.pravatar.cc/150?u=3"
+    },
+    "email": "s.jenkins@gmail.com",
+    "phone": "+1 887 049 1122",
+    "location": "Toronto, Ontario"
+  },
+  {
+    "id": "3",
+    "buyer": {
+      "name": "David Miller",
+      "avatar": "https://i.pravatar.cc/150?u=5"
+    },
+    "email": "d.miller@outlook.com",
+    "phone": "+1 887 049 4455",
+    "location": "Vancouver, BC"
+  },
+  {
+    "id": "4",
+    "buyer": {
+      "name": "Mila Kunis",
+      "avatar": "https://i.pravatar.cc/150?u=8"
+    },
+    "email": "mila.k@gmail.com",
+    "phone": "+1 887 049 9900",
+    "location": "Montreal, Quebec"
+  },
+  {
+    "id": "5",
+    "buyer": {
+      "name": "Alex Thompson",
+      "avatar": "https://i.pravatar.cc/150?u=11"
+    },
+    "email": "alex.t@gmail.com",
+    "phone": "+1 887 049 7788",
+    "location": "Calgary, Alberta"
+  },
+  {
+    "id": "6",
+    "buyer": {
+      "name": "Emily Carter",
+      "avatar": "https://i.pravatar.cc/150?u=14"
+    },
+    "email": "emily.carter@gmail.com",
+    "phone": "+1 887 049 6633",
+    "location": "Ottawa, Ontario"
+  },
+  {
+    "id": "7",
+    "buyer": {
+      "name": "Ryan Cooper",
+      "avatar": "https://i.pravatar.cc/150?u=17"
+    },
+    "email": "ryan.cooper@yahoo.com",
+    "phone": "+1 887 049 2211",
+    "location": "Winnipeg, Manitoba"
+  },
+  {
+    "id": "8",
+    "buyer": {
+      "name": "Olivia Brown",
+      "avatar": "https://i.pravatar.cc/150?u=20"
+    },
+    "email": "d.miller@outlook.com",
+    "phone": "+1 887 049 4455",
+    "location": "Vancouver, BC"
+  },
+  {
+    "id": "9",
+    "buyer": {
+      "name": "Ethan Wilson",
+      "avatar": "https://i.pravatar.cc/150?u=23"
+    },
+    "email": "ethan.wilson@gmail.com",
+    "phone": "+1 887 049 3344",
+    "location": "Edmonton, Alberta"
+  },
+  {
+    "id": "10",
+    "buyer": {
+      "name": "Sophia Davis",
+      "avatar": "https://i.pravatar.cc/150?u=26"
+    },
+    "email": "sophia.davis@gmail.com",
+    "phone": "+1 887 049 5566",
+    "location": "Halifax, Nova Scotia"
+  }
+]

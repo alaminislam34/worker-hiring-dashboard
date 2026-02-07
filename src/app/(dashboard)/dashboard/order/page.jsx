@@ -8,31 +8,26 @@ import {
   Loader2,
 } from "lucide-react";
 import CommonTable from "../components/CommonTable";
+import PaymentModal from "../components/PaymentModal";
 
 const OrderManagement = () => {
   const [ordersData, setOrdersData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState("All Orders");
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedWorker, setSelectedWorker] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const rowsPerPage = 8;
 
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch("/data.json");
-        if (!response.ok) throw new Error("Failed to load data");
-        const data = await response.json();
+    fetch("/data.json")
+      .then((res) => res.json())
+      .then((data) => {
         setOrdersData(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
         setLoading(false);
-      }
-    };
-    loadData();
+      })
+      .catch(() => setLoading(false));
   }, []);
 
   const headers = [
@@ -45,31 +40,6 @@ const OrderManagement = () => {
     { label: "Budget", key: "budget", sortable: true },
   ];
 
-  // Dynamic Tabs with exact counts
-  const tabs = useMemo(
-    () => [
-      { name: "All Orders", count: ordersData.length },
-      {
-        name: "Accepted",
-        count: ordersData.filter((d) => d.status === "Accepted").length,
-      },
-      {
-        name: "Confirmed",
-        count: ordersData.filter((d) => d.status === "Confirmed").length,
-      },
-      {
-        name: "Progress",
-        count: ordersData.filter((d) => d.status === "Progress").length,
-      },
-      {
-        name: "Completed",
-        count: ordersData.filter((d) => d.status === "Completed").length,
-      },
-    ],
-    [ordersData],
-  );
-
-  // Combined Search and Tab Filter
   const filteredData = useMemo(() => {
     return ordersData.filter((item) => {
       const matchesTab =
@@ -81,58 +51,60 @@ const OrderManagement = () => {
     });
   }, [activeTab, searchQuery, ordersData]);
 
-  // Functional Pagination Logic
-  const totalPages = Math.ceil(filteredData.length / rowsPerPage);
   const paginatedData = useMemo(() => {
     const start = (currentPage - 1) * rowsPerPage;
     return filteredData.slice(start, start + rowsPerPage);
   }, [filteredData, currentPage]);
 
+  const handleConfirmPayment = (id, txId) => {
+    alert(`Payment Sent!\nOrder: ${id}\nTXID: ${txId}`);
+    // Update local state to reflect payment
+    setOrdersData((prev) =>
+      prev.map((order) =>
+        order.order.id === id
+          ? { ...order, payment: "Paid", status: "Completed" }
+          : order,
+      ),
+    );
+  };
+
   if (loading)
     return (
-      <div className="w-full h-64 flex flex-col items-center justify-center text-[#73a34f]">
-        <Loader2 className="animate-spin mb-2" size={32} />
-        <p className="text-gray-400 font-medium">Loading orders...</p>
-      </div>
-    );
-
-  if (error)
-    return (
-      <div className="p-8 text-red-500 bg-red-50 rounded-2xl">
-        Error: {error}
+      <div className="h-96 flex items-center justify-center">
+        <Loader2 className="animate-spin text-[#73a34f]" size={40} />
       </div>
     );
 
   return (
-    <div className="w-full bg-white rounded-[2.5rem] p-8 shadow-sm border border-gray-50">
-      {/* 1. Tab Navigation */}
+    <div className="w-full bg-white rounded-[2.5rem] p-8 shadow-sm border border-gray-50 min-h-150 relative">
       <div className="flex gap-8 border-b border-gray-100 mb-6 overflow-x-auto scrollbar-hide">
-        {tabs.map((tab) => (
-          <button
-            key={tab.name}
-            onClick={() => {
-              setActiveTab(tab.name);
-              setCurrentPage(1);
-            }}
-            className={`pb-4 text-base font-semibold transition-all relative whitespace-nowrap ${
-              activeTab === tab.name
-                ? "text-[#73a34f]"
-                : "text-gray-400 hover:text-gray-600"
-            }`}
-          >
-            {tab.name} ({tab.count})
-            {activeTab === tab.name && (
-              <div className="absolute bottom-0 left-0 w-full h-0.5 bg-[#73a34f]" />
-            )}
-          </button>
-        ))}
+        {["All Orders", "Accepted", "Confirmed", "Progress", "Completed"].map(
+          (tab) => (
+            <button
+              key={tab}
+              onClick={() => {
+                setActiveTab(tab);
+                setCurrentPage(1);
+              }}
+              className={`pb-4 text-base font-bold transition-all relative whitespace-nowrap ${activeTab === tab ? "text-[#73a34f]" : "text-gray-400"}`}
+            >
+              {tab} (
+              {tab === "All Orders"
+                ? ordersData.length
+                : ordersData.filter((d) => d.status === tab).length}
+              )
+              {activeTab === tab && (
+                <div className="absolute bottom-0 left-0 w-full h-1 bg-[#73a34f] rounded-full" />
+              )}
+            </button>
+          ),
+        )}
       </div>
 
-      {/* 2. Functional Search Bar */}
       <div className="relative mb-8">
         <Search
           className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300"
-          size={20}
+          size={22}
         />
         <input
           type="text"
@@ -142,54 +114,63 @@ const OrderManagement = () => {
             setSearchQuery(e.target.value);
             setCurrentPage(1);
           }}
-          className="w-full pl-12 pr-4 py-3.5 bg-[#f9fafb] rounded-2xl outline-none border-none focus:ring-2 focus:ring-[#73a34f]/10"
+          className="w-full pl-14 pr-6 py-4 bg-[#f9fafb] rounded-[1.25rem] outline-none border-none focus:ring-2 focus:ring-[#73a34f]/10 text-lg"
         />
       </div>
 
-      {/* 3. Table Display */}
-      <CommonTable headers={headers} data={paginatedData} />
+      <CommonTable
+        headers={headers}
+        data={paginatedData}
+        onAction={(row) => {
+          setSelectedWorker(row);
+          setIsModalOpen(true);
+        }}
+      />
 
-      {/* 4. Functional Pagination Footer */}
-      <div className="flex flex-col sm:flex-row justify-between items-center mt-8 gap-4">
-        <div className="flex items-center gap-2 text-gray-400 text-sm">
-          <span>Show result:</span>
-          <div className="flex items-center gap-2 px-3 py-1.5 border border-gray-100 rounded-lg text-black font-bold">
-            {rowsPerPage} <ChevronDown size={14} />
-          </div>
+      <div className="flex justify-between items-center mt-8">
+        <div className="flex items-center gap-2 text-gray-400 font-bold">
+          Show result:{" "}
+          <span className="bg-gray-50 px-3 py-1 rounded-lg text-black border border-gray-100 flex items-center gap-1">
+            8 <ChevronDown size={14} />
+          </span>
         </div>
-
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-2">
           <button
             disabled={currentPage === 1}
             onClick={() => setCurrentPage((p) => p - 1)}
-            className="p-2 text-gray-400 hover:bg-gray-50 rounded-lg disabled:opacity-20"
+            className="p-2 disabled:opacity-20"
           >
-            <ChevronLeft size={20} />
+            <ChevronLeft />
           </button>
-
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
-            <button
-              key={n}
-              onClick={() => setCurrentPage(n)}
-              className={`w-9 h-9 rounded-lg text-sm font-bold transition-colors ${
-                currentPage === n
-                  ? "bg-gray-100 text-black"
-                  : "text-gray-400 hover:bg-gray-50"
-              }`}
-            >
-              {n}
-            </button>
-          ))}
-
+          {[...Array(Math.ceil(filteredData.length / rowsPerPage))].map(
+            (_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentPage(i + 1)}
+                className={`w-10 h-10 rounded-xl font-bold ${currentPage === i + 1 ? "bg-gray-100 text-black" : "text-gray-400"}`}
+              >
+                {i + 1}
+              </button>
+            ),
+          )}
           <button
-            disabled={currentPage === totalPages}
+            disabled={
+              currentPage === Math.ceil(filteredData.length / rowsPerPage)
+            }
             onClick={() => setCurrentPage((p) => p + 1)}
-            className="p-2 text-gray-400 hover:bg-gray-50 rounded-lg disabled:opacity-20"
+            className="p-2 disabled:opacity-20"
           >
-            <ChevronRight size={20} />
+            <ChevronRight />
           </button>
         </div>
       </div>
+
+      <PaymentModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        workerData={selectedWorker}
+        onConfirm={handleConfirmPayment}
+      />
     </div>
   );
 };
