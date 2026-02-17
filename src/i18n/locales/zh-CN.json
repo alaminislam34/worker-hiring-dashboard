@@ -18,7 +18,8 @@
     "payment": "支付",
     "management": "管理",
     "logout": "退出登录",
-    "admin": "管理员"
+    "admin": "管理员",
+    "logoutSuccess": "退出登录成功！"
   },
   "language": {
     "english": "英语",

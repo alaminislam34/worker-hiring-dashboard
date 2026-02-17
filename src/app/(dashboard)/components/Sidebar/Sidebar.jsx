@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Users, FileText, IdCard, LayoutGrid } from "lucide-react";
 import { HiOutlineLogout } from "react-icons/hi";
 import { IoMdListBox } from "react-icons/io";
@@ -11,6 +11,7 @@ import { FaUser } from "react-icons/fa6";
 import { FaUserTie } from "react-icons/fa6";
 import { BsCreditCardFill } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
+import toast from "react-hot-toast";
 
 const SIDELINKS = [
   {
@@ -48,7 +49,13 @@ const SIDELINKS = [
 const Sidebar = () => {
   const pathname = usePathname();
   const { t } = useTranslation();
-
+  const router = useRouter();
+  const handleLogout = () => {
+    toast.success(t("nav.logoutSuccess"));
+    setTimeout(() => {
+      router.push("/login");
+    }, 500);
+  };
   return (
     <aside className="fixed left-0 top-0 min-h-200 overflow-y-auto h-screen lg:w-67 xl:w-77">
       <div className="h-full">
@@ -99,7 +106,10 @@ const Sidebar = () => {
             </nav>
           </div>
 
-          <button className="flex items-center gap-4 w-full px-5 py-3 mt-auto font-semibold text-white transition-all rounded-xl bg-primary hover:bg-primary hover:shadow-lg active:scale-95 group">
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-4 w-full px-5 py-3 mt-auto font-semibold text-white transition-all rounded-xl bg-primary hover:bg-primary hover:shadow-lg active:scale-95 group"
+          >
             <HiOutlineLogout className="text-xl transition-transform group-hover:translate-x-1" />
             <span>{t("nav.logout")}</span>
           </button>

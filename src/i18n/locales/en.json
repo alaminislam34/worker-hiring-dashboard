@@ -18,7 +18,8 @@
     "payment": "Payment",
     "management": "Management",
     "logout": "Log out",
-    "admin": "Admin"
+    "admin": "Admin",
+    "logoutSuccess": "Logged out successfully!"
   },
   "language": {
     "english": "English",
