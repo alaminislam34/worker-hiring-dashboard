@@ -127,7 +127,7 @@ const DashboardNavbar = () => {
 
       {/* --- Sidebar Overlay & Panel --- */}
       <div
-        className={`fixed inset-0 z-[100] transition-all duration-300 ${
+        className={`fixed inset-0 z-100 transition-all duration-300 ${
           isSidebarOpen ? "visible" : "invisible"
         }`}
       >
