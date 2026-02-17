@@ -1,3 +1,4 @@
+// src/i18n/config.js
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import en from "./locales/en.json";
@@ -8,9 +9,9 @@ const resources = {
   "zh-CN": { translation: zhCN },
 };
 
+// ADD 'export' TO THESE THREE:
 export const LANGUAGE_STORAGE_KEY = "dashboard_language";
-export const SUPPORTED_LANGUAGES = Object.keys(resources);
-const defaultLanguage = "en";
+export const defaultLanguage = "en";
 
 export const normalizeLanguage = (language) => {
   if (!language) return defaultLanguage;
@@ -21,12 +22,10 @@ export const normalizeLanguage = (language) => {
 if (!i18n.isInitialized) {
   i18n.use(initReactI18next).init({
     resources,
-    lng: defaultLanguage,
+    lng: defaultLanguage, // Fallback for SSR
     fallbackLng: defaultLanguage,
-    supportedLngs: SUPPORTED_LANGUAGES,
-    load: "languageOnly",
     interpolation: { escapeValue: false },
-    returnNull: false,
+    react: { useSuspense: false },
   });
 }
 
