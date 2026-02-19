@@ -33,7 +33,7 @@
   },
   "table": {
     "allOrders": "全部订单",
-    "allPayment": "全部支付",
+    "allPayment": "所有付款",
     "date": "日期",
     "buyer": "买家",
     "payment": "支付",
@@ -61,7 +61,7 @@
   "stats": {
     "totalRevenue": "总收入",
     "activeTasks": "活跃任务",
-    "completeTask": "完成任务",
+    "completeTask": "已完成的任务",
     "totalUsers": "总用户",
     "upFromYesterday": "较昨日上升"
   },

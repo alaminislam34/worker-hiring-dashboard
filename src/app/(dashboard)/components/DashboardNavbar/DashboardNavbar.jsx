@@ -83,7 +83,7 @@ const DashboardNavbar = () => {
         <span className="h-8 w-px bg-gray-200 inline-block mx-1"></span>
 
         {/* Language Selector */}
-        <div className="flex items-center gap-2 px-2">
+        {/* <div className="flex items-center gap-2 px-2">
           <div className="relative w-6 h-6 shrink-0">
             <Image
               src={isChinese ? "/images/china.png" : "/images/england.png"}
@@ -100,9 +100,9 @@ const DashboardNavbar = () => {
             <option value="en">{t("language.english")}</option>
             <option value="zh-CN">{t("language.chinese")}</option>
           </select>
-        </div>
+        </div> */}
 
-        <span className="h-8 w-px bg-gray-200 inline-block mx-1"></span>
+        {/* <span className="h-8 w-px bg-gray-200 inline-block mx-1"></span> */}
 
         {/* User Info */}
         <div className="flex items-center gap-3">

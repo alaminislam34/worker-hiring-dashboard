@@ -9,7 +9,7 @@ export default function DashboardLayout2({ children }) {
 
   return (
     /* overflow-hidden is REQUIRED to hide the drawer when it's off-screen */
-    <section className="relative w-full h-full min-h-[inherit] overflow-hidden">
+    <section className="relative w-full h-full min-h-100 overflow-hidden">
       <div className="w-full h-full p-4">{children}</div>
 
       {/* Render the drawer - it will animate itself based on isOpen */}

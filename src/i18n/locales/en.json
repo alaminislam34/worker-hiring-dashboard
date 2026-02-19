@@ -33,7 +33,7 @@
   },
   "table": {
     "allOrders": "All Orders",
-    "allPayment": "All Payment",
+    "allPayment": "All Payments",
     "date": "Date",
     "buyer": "Buyer",
     "payment": "Payment",
@@ -61,7 +61,7 @@
   "stats": {
     "totalRevenue": "Total revenue",
     "activeTasks": "Active tasks",
-    "completeTask": "Complete task",
+    "completeTask": "Completed tasks",
     "totalUsers": "Total users",
     "upFromYesterday": "Up from yesterday"
   },
