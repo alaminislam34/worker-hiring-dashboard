@@ -17,6 +17,7 @@ import Image from "next/image";
 import { StateContext } from "@/app/providers/StateProviders";
 import { useTranslation } from "react-i18next";
 import { normalizeLanguage, LANGUAGE_STORAGE_KEY } from "@/i18n/config";
+import { BadgeAlert } from "lucide-react";
 
 const NAV_LINKS = [
   { key: "dashboard", icon: LayoutGrid, href: "/dashboard" },
@@ -71,6 +72,14 @@ const DashboardNavbar = () => {
 
       {/* --- Right Section --- */}
       <div className="flex items-center gap-2 xl:gap-4 shrink-0">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          type="button"
+          className="p-2.5 hover:bg-gray-200 transition-all duration-300 rounded-full relative"
+        >
+          <BadgeAlert size={20} />
+          <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white" />
+        </button>
         <button
           onClick={() => setIsOpen(!isOpen)}
           type="button"

@@ -13,8 +13,6 @@ const NotificationDrawer = ({ isOpen, setIsOpen }) => {
 
   return (
     <div
-      /* absolute ব্যবহার করা হয়েছে যাতে এটি DashboardLayout2 এর ভেতর থাকে।
-         z-40 দেওয়া হয়েছে যাতে এটি Navbar (z-50) এর নিচে থাকে। */
       className={`absolute inset-0 z-40 transition-all duration-500 ease-in-out flex justify-end
         ${isOpen ? "visible" : "invisible"}`}
     >
