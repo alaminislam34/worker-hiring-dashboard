@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useMemo, useEffect, useRef } from "react";
+import React, { useState, useMemo, useEffect, useRef, useContext } from "react";
 import {
   Search,
   ChevronLeft,
@@ -13,12 +13,15 @@ import CommonTable from "../components/CommonTable";
 import PaymentModal from "../components/PaymentModal";
 import { useTranslation } from "react-i18next";
 import { getOrderStatusKey } from "@/i18n/utils";
+import { StateContext } from "@/app/providers/StateProviders";
 
 const OrderManagement = () => {
   const router = useRouter();
   const { t } = useTranslation();
   const menuRef = useRef(null);
   const actionButtonRefs = useRef({});
+  const { isModalOpen, setIsModalOpen, selectedWorker, setSelectedWorker } =
+    useContext(StateContext);
 
   const [ordersData, setOrdersData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -27,8 +30,7 @@ const OrderManagement = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [openMenuId, setOpenMenuId] = useState(null);
   const [menuPosition, setMenuPosition] = useState({});
-  const [selectedWorker, setSelectedWorker] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const rowsPerPage = 8;
 
   useEffect(() => {

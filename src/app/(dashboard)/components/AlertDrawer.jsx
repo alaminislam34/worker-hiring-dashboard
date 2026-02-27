@@ -1,41 +1,33 @@
 "use client";
 import Image from "next/image";
-import { X, Clock, AlertCircle } from "lucide-react";
-import { useTranslation } from "react-i18next";
+import { X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import { StateContext } from "@/app/providers/StateProviders";
 
-const AlertDrawer = ({ isOpen, setIsOpen, onPayClick }) => {
-  const { t } = useTranslation();
-
-  // Simulated data for unpaid or pending orders
-  const pendingPayments = [
-    {
-      id: "ord-101",
-      workerName: "Alex Smith",
-      avatar: "https://i.pravatar.cc/150?u=alex",
-      amount: "$90",
-      task: "Assemble IKEA Desk",
-      timeLeft: "2 days left",
-      isOverdue: false,
-    },
-    {
-      id: "ord-102",
-      workerName: "Jordan Reed",
-      avatar: "https://i.pravatar.cc/150?u=jordan",
-      amount: "$150",
-      task: "Garden Maintenance",
-      timeLeft: "Overdue",
-      isOverdue: true,
-    },
-    // Add more items here...
-  ];
-
+const AlertDrawer = ({ isOpen, setIsOpen, orders = [] }) => {
+  const router = useRouter();
+  const { setIsModalOpen, setSelectedWorker } = useContext(StateContext);
+  // Filter orders for pending/unpaid payments
+  const pendingPayments = (orders || []).filter(
+    (order) => ["Pending", "Unpaid"].includes(order.payment)
+  );
+  // Helper: get days left or overdue
+  function getTimeLeft(orderDate) {
+    const today = new Date();
+    const due = new Date(orderDate);
+    const diff = Math.ceil((due - today) / (1000 * 60 * 60 * 24));
+    if (diff < 0) return "Overdue";
+    if (diff === 0) return "Due today";
+    return `${diff} day${diff > 1 ? "s" : ""} left`;
+  }
   return (
     <div
       className={`absolute inset-0 z-40 transition-all duration-500 ease-in-out flex justify-end
         ${isOpen ? "visible" : "invisible"}`}
     >
       <div
-        className={`absolute inset-0 bg-black/10 backdrop-blur-[2px] transition-opacity duration-500
+        className={`absolute inset-0 bg-black/5 backdrop-blur-[2px] transition-opacity duration-500
           ${isOpen ? "opacity-100" : "opacity-0"}`}
         onClick={() => setIsOpen(false)}
       />
@@ -48,7 +40,7 @@ const AlertDrawer = ({ isOpen, setIsOpen, onPayClick }) => {
         <div className="flex justify-between items-center mb-6">
           <div>
             <h2 className="text-xl font-bold text-gray-800">
-              {t("notifications.pendingPayments") || "Pending Payments"}
+              Pending Payments
             </h2>
             <p className="text-xs text-gray-400">
               Action required for {pendingPayments.length} orders
@@ -67,7 +59,7 @@ const AlertDrawer = ({ isOpen, setIsOpen, onPayClick }) => {
             <div
               key={item.id}
               className={`flex flex-col gap-3 p-4 rounded-2xl border transition-all ${
-                item.isOverdue
+                item.payment === "Unpaid"
                   ? "border-red-100 bg-red-50/30"
                   : "border-gray-100 bg-white hover:border-[#73a34f]/30"
               }`}
@@ -75,40 +67,29 @@ const AlertDrawer = ({ isOpen, setIsOpen, onPayClick }) => {
               <div className="flex items-start gap-3">
                 <div className="relative w-10 h-10 shrink-0">
                   <Image
-                    src={item.avatar}
+                    src={item.worker?.avatar}
                     fill
-                    alt={item.workerName}
+                    alt={item.worker?.name}
                     className="rounded-full object-cover border border-gray-200"
                     unoptimized
                   />
-                  {item.isOverdue && (
-                    <div className="absolute -top-1 -right-1 bg-red-500 rounded-full p-0.5 border-2 border-white">
-                      <AlertCircle size={10} className="text-white" />
-                    </div>
-                  )}
                 </div>
 
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-gray-800 leading-tight mb-1">
-                    <span className="font-bold">{item.workerName}</span> is
-                    waiting for payment of{" "}
+                    <span className="font-bold">{item.worker?.name}</span> is
+                    waiting for payment of {" "}
                     <span className="font-bold text-[#73a34f]">
-                      {item.amount}
+                      ${item.budget}
                     </span>{" "}
-                    for "{item.task}"
+                    for "{item.order?.title}"
                   </p>
 
                   <div className="flex items-center gap-1.5 text-[11px]">
-                    <Clock
-                      size={12}
-                      className={
-                        item.isOverdue ? "text-red-500" : "text-gray-400"
-                      }
-                    />
                     <span
-                      className={`font-medium ${item.isOverdue ? "text-red-500" : "text-gray-400"}`}
+                      className={`font-medium ${item.payment === "Unpaid" ? "text-red-500" : "text-gray-400"}`}
                     >
-                      {item.timeLeft}
+                      {getTimeLeft(item.date)}
                     </span>
                   </div>
                 </div>
@@ -116,8 +97,10 @@ const AlertDrawer = ({ isOpen, setIsOpen, onPayClick }) => {
 
               <button
                 onClick={() => {
-                  if (onPayClick) onPayClick(item);
+                  setSelectedWorker(item);
+                  setIsModalOpen(true);
                   setIsOpen(false);
+                  router.push("/dashboard/order");
                 }}
                 className="w-full py-2 bg-[#73a34f] text-white text-xs font-bold rounded-xl hover:bg-[#5f8a3f] transition-colors shadow-sm"
               >

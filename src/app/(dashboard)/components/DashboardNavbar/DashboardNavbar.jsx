@@ -29,7 +29,8 @@ const NAV_LINKS = [
 
 const DashboardNavbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { isOpen, setIsOpen } = useContext(StateContext);
+  const { isOpen, setIsOpen, isAlertOpen, setIsAlertOpen } =
+    useContext(StateContext);
   const pathname = usePathname();
   const { t, i18n } = useTranslation();
 
@@ -73,7 +74,7 @@ const DashboardNavbar = () => {
       {/* --- Right Section --- */}
       <div className="flex items-center gap-2 xl:gap-4 shrink-0">
         <button
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => setIsAlertOpen(!isAlertOpen)}
           type="button"
           className="p-2.5 hover:bg-gray-200 transition-all duration-300 rounded-full relative"
         >
