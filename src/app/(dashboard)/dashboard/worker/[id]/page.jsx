@@ -31,7 +31,6 @@ const WorkerDetails = () => {
         </div>
       </div>
 
-      {/* Performance Metrics Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
         {stats.map((stat, index) => (
           <div
@@ -43,12 +42,10 @@ const WorkerDetails = () => {
             </p>
 
             {stat.isStatus ? (
-              /* Account Status Badge */
               <div className="bg-[#e8f5e9] text-[#2e7d32] px-6 py-2 rounded-xl font-bold text-lg">
                 {stat.value}
               </div>
             ) : (
-              /* Standard Metric Value */
               <p className="text-xl md:text-2xl xl:text-3xl font-bold text-[#1a1a1a] tracking-tight">
                 {stat.value}
               </p>

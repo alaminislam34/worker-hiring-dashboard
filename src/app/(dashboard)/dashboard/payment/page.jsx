@@ -43,6 +43,7 @@ const TransactionHistory = () => {
     { label: t("table.name"), key: "user", sortable: true },
     { label: t("table.type"), key: "type", sortable: false },
     { label: t("table.amount"), key: "amount", sortable: true },
+    { label: "Payment Action", key: "action", sortable: false },
   ];
 
   const paymentTabs = [
@@ -123,7 +124,14 @@ const TransactionHistory = () => {
       </div>
 
       {/* Main Table */}
-      <CommonTable headers={headers} data={paginatedData} />
+      <CommonTable
+        headers={headers}
+        data={paginatedData.map((row) => ({
+          ...row,
+          action: "Refund",
+        }))}
+        path={"payment"}
+      />
 
       {/* Pagination Footer */}
       <div className="flex flex-col sm:flex-row justify-between items-center mt-8 gap-4">

@@ -8,13 +8,13 @@ import {
   getPaymentStatusKey,
   getPaymentTypeKey,
 } from "@/i18n/utils";
+import { useRouter } from "next/navigation";
 
-const CommonTable = ({ headers, data, onAction }) => {
+const CommonTable = ({ headers, data, onAction, path }) => {
+  const router = useRouter();
   const { t } = useTranslation();
 
   const renderCell = (key, value, row) => {
-    // 1. Handle User-style cells (Avatar + Name) for Buyer, Worker, and Transaction pages
-    //
     if (key === "buyer" || key === "worker" || key === "user") {
       return (
         <div className="flex items-center gap-3">
@@ -35,7 +35,7 @@ const CommonTable = ({ headers, data, onAction }) => {
     }
 
     switch (key) {
-      case "order": // Order ID and Title
+      case "order":
         return (
           <div className="flex flex-col">
             <span className="text-gray-900 font-bold text-base leading-tight">
@@ -47,7 +47,7 @@ const CommonTable = ({ headers, data, onAction }) => {
 
       case "payment":
       case "status":
-      case "type": // Added "type" for Credit/Debit badges
+      case "type":
         const badgeKey =
           key === "status"
             ? getOrderStatusKey(value)
@@ -55,18 +55,16 @@ const CommonTable = ({ headers, data, onAction }) => {
               ? getPaymentStatusKey(value)
               : getPaymentTypeKey(value);
 
-        const isCompleted = ["completed", "paid", "credit"].includes(
-          badgeKey,
-        );
+        const isCompleted = ["completed", "paid", "credit"].includes(badgeKey);
         const isAccepted = badgeKey === "accepted";
         const isProgress = badgeKey === "progress";
         const isDebit = badgeKey === "debit";
 
         let colors = "bg-gray-100 text-gray-500";
-        if (isCompleted) colors = "bg-[#ecfdf5] text-[#10b981]"; // Green
-        if (isAccepted) colors = "bg-[#f3f0ff] text-[#7c3aed]"; // Purple
-        if (isProgress) colors = "bg-[#fff7ed] text-[#ea580c]"; // Orange
-        if (isDebit) colors = "bg-red-50 text-red-500"; // Red for Debit
+        if (isCompleted) colors = "bg-[#ecfdf5] text-[#10b981]";
+        if (isAccepted) colors = "bg-[#f3f0ff] text-[#7c3aed]";
+        if (isProgress) colors = "bg-[#fff7ed] text-[#ea580c]";
+        if (isDebit) colors = "bg-red-50 text-red-500";
 
         const badgeLabel =
           key === "status"
@@ -135,8 +133,9 @@ const CommonTable = ({ headers, data, onAction }) => {
         <tbody className="divide-y divide-gray-50">
           {data.map((row, idx) => (
             <tr
+              onClick={() => router.push(`/dashboard/${path}/${row.id}`)}
               key={idx}
-              className="group hover:bg-gray-50/50 transition-colors"
+              className="group hover:bg-gray-50/50 transition-colors cursor-pointer"
             >
               {headers.map((h) => (
                 <td

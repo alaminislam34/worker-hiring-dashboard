@@ -2,7 +2,7 @@
   {
     "id": "1001",
     "order": { "title": "Assemble Office Work Desk", "id": "ORD-784512" },
-    "date": "2026-01-12",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Michael Carter",
       "avatar": "https://i.pravatar.cc/150?u=michael.carter"
@@ -18,7 +18,7 @@
   {
     "id": "1002",
     "order": { "title": "Install 55-inch Smart TV", "id": "ORD-784518" },
-    "date": "2026-01-15",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Emma Richardson",
       "avatar": "https://i.pravatar.cc/150?u=emma.richardson"
@@ -34,7 +34,7 @@
   {
     "id": "1003",
     "order": { "title": "Repair Kitchen Sink Leakage", "id": "ORD-784525" },
-    "date": "2026-01-18",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Olivia Martinez",
       "avatar": "https://i.pravatar.cc/150?u=olivia.martinez"
@@ -50,7 +50,7 @@
   {
     "id": "1004",
     "order": { "title": "Interior Bedroom Painting", "id": "ORD-784530" },
-    "date": "2026-01-20",
+    "date": "2026-02-27",
     "buyer": {
       "name": "William Anderson",
       "avatar": "https://i.pravatar.cc/150?u=william.anderson"
@@ -66,7 +66,7 @@
   {
     "id": "1005",
     "order": { "title": "Install Ceiling Fan", "id": "ORD-784536" },
-    "date": "2026-01-22",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Sophia Bennett",
       "avatar": "https://i.pravatar.cc/150?u=sophia.bennett"
@@ -82,7 +82,7 @@
   {
     "id": "1006",
     "order": { "title": "Fix Bathroom Shower Pipe", "id": "ORD-784541" },
-    "date": "2026-01-24",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Aiden Thompson",
       "avatar": "https://i.pravatar.cc/150?u=aiden.thompson"
@@ -98,7 +98,7 @@
   {
     "id": "1007",
     "order": { "title": "Install Washing Machine", "id": "ORD-784548" },
-    "date": "2026-01-26",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Isabella Moore",
       "avatar": "https://i.pravatar.cc/150?u=isabella.moore"
@@ -114,7 +114,7 @@
   {
     "id": "1008",
     "order": { "title": "AC Cleaning & Maintenance", "id": "ORD-784552" },
-    "date": "2026-01-28",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Noah Patel",
       "avatar": "https://i.pravatar.cc/150?u=noah.patel"
@@ -130,7 +130,7 @@
   {
     "id": "1009",
     "order": { "title": "Repair Electrical Switch Board", "id": "ORD-784559" },
-    "date": "2026-01-30",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Lucas Hernandez",
       "avatar": "https://i.pravatar.cc/150?u=lucas.hernandez"
@@ -149,7 +149,7 @@
       "title": "Window Curtain Rod Installation",
       "id": "ORD-784565"
     },
-    "date": "2026-02-01",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Charlotte Wilson",
       "avatar": "https://i.pravatar.cc/150?u=charlotte.wilson"
@@ -165,7 +165,7 @@
   {
     "id": "1011",
     "order": { "title": "Home Deep Cleaning Service", "id": "ORD-784572" },
-    "date": "2026-02-03",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Emily Foster",
       "avatar": "https://i.pravatar.cc/150?u=emily.foster"
@@ -181,7 +181,7 @@
   {
     "id": "1012",
     "order": { "title": "Replace Door Lock", "id": "ORD-784578" },
-    "date": "2026-02-05",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Henry Adams",
       "avatar": "https://i.pravatar.cc/150?u=henry.adams"
@@ -197,7 +197,7 @@
   {
     "id": "1013",
     "order": { "title": "Fix Wooden Door Hinge", "id": "ORD-784584" },
-    "date": "2026-02-07",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Daniel Morgan",
       "avatar": "https://i.pravatar.cc/150?u=daniel.morgan"
@@ -213,7 +213,7 @@
   {
     "id": "1014",
     "order": { "title": "Install Wall-Mounted Bookshelf", "id": "ORD-784590" },
-    "date": "2026-02-09",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Grace Turner",
       "avatar": "https://i.pravatar.cc/150?u=grace.turner"
@@ -229,7 +229,7 @@
   {
     "id": "1015",
     "order": { "title": "Gas Stove Repair Service", "id": "ORD-784597" },
-    "date": "2026-02-11",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Rahul Mehta",
       "avatar": "https://i.pravatar.cc/150?u=rahul.mehta"
@@ -245,7 +245,7 @@
   {
     "id": "1016",
     "order": { "title": "Fix Internet Router Setup", "id": "ORD-784603" },
-    "date": "2026-02-13",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Ethan Roberts",
       "avatar": "https://i.pravatar.cc/150?u=ethan.roberts"
@@ -261,7 +261,7 @@
   {
     "id": "1017",
     "order": { "title": "Balcony Light Installation", "id": "ORD-784610" },
-    "date": "2026-02-15",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Natalie Brooks",
       "avatar": "https://i.pravatar.cc/150?u=natalie.brooks"
@@ -277,7 +277,7 @@
   {
     "id": "1018",
     "order": { "title": "Replace Bathroom Exhaust Fan", "id": "ORD-784618" },
-    "date": "2026-02-17",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Priya Sharma",
       "avatar": "https://i.pravatar.cc/150?u=priya.sharma"
@@ -296,7 +296,7 @@
       "title": "Kitchen Cabinet Handle Replacement",
       "id": "ORD-784625"
     },
-    "date": "2026-02-19",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Benjamin Clark",
       "avatar": "https://i.pravatar.cc/150?u=benjamin.clark"
@@ -312,7 +312,7 @@
   {
     "id": "1020",
     "order": { "title": "Emergency Plumbing Leak Fix", "id": "ORD-784631" },
-    "date": "2026-02-21",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Andrew Collins",
       "avatar": "https://i.pravatar.cc/150?u=andrew.collins"
@@ -328,7 +328,7 @@
   {
     "id": "1021",
     "order": { "title": "Fix Bedroom Door Lock", "id": "ORD-784638" },
-    "date": "2026-02-22",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Hannah Lewis",
       "avatar": "https://i.pravatar.cc/150?u=hannah.lewis"
@@ -344,7 +344,7 @@
   {
     "id": "1022",
     "order": { "title": "Rewire Living Room Switches", "id": "ORD-784644" },
-    "date": "2026-02-23",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Carlos Mendoza",
       "avatar": "https://i.pravatar.cc/150?u=carlos.mendoza"
@@ -360,7 +360,7 @@
   {
     "id": "1023",
     "order": { "title": "Furniture Moving (2 Rooms)", "id": "ORD-784651" },
-    "date": "2026-02-24",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Samantha Lee",
       "avatar": "https://i.pravatar.cc/150?u=samantha.lee"
@@ -376,7 +376,7 @@
   {
     "id": "1024",
     "order": { "title": "Fix Laptop Power Issue", "id": "ORD-784657" },
-    "date": "2026-02-25",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Mohammed Ali",
       "avatar": "https://i.pravatar.cc/150?u=mohammed.ali"
@@ -392,7 +392,7 @@
   {
     "id": "1025",
     "order": { "title": "Install Security Door Camera", "id": "ORD-784664" },
-    "date": "2026-02-26",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Victoria Brown",
       "avatar": "https://i.pravatar.cc/150?u=victoria.brown"
@@ -424,7 +424,7 @@
   {
     "id": "1027",
     "order": { "title": "Replace Broken Window Glass", "id": "ORD-784678" },
-    "date": "2026-02-28",
+    "date": "2026-02-27",
     "buyer": {
       "name": "Paul Edwards",
       "avatar": "https://i.pravatar.cc/150?u=paul.edwards"

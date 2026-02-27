@@ -67,6 +67,11 @@ const OrderManagement = () => {
     { label: t("table.payment"), key: "payment", sortable: false },
     { label: t("table.worker"), key: "worker", sortable: false },
     { label: t("table.status"), key: "status", sortable: false },
+    {
+      label: "Status Duration",
+      key: "duration",
+      sortable: true,
+    },
     { label: t("table.budget"), key: "budgetColumn", sortable: true },
     { label: "Action", key: "action", sortable: false },
   ];
@@ -103,6 +108,19 @@ const OrderManagement = () => {
           : order,
       ),
     );
+  };
+
+  const getStatusDuration = (date) => {
+    // console.log(date);
+    const now = new Date();
+    const past = new Date(date);
+    const diff = Math.floor((now - past) / 1000);
+    if (diff < 60) return `${diff}s ago`;
+    if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+    if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+
+    // console.log( `${Math.floor(diff / 86400)}d ago`)
+    return `${Math.floor(diff / 86400)}d ago`;
   };
 
   if (loading)
@@ -164,6 +182,7 @@ const OrderManagement = () => {
           headers={headers}
           data={paginatedData.map((row) => ({
             ...row,
+            duration: getStatusDuration(row.date),
             budgetColumn: (
               <div
                 onClick={() => {
@@ -228,7 +247,7 @@ const OrderManagement = () => {
                     >
                       Payment Details
                     </button>
-                    <button
+                    {/* <button
                       onClick={() => {
                         router.push(`/dashboard/orders/${row.order.id}`);
                         setOpenMenuId(null);
@@ -237,7 +256,7 @@ const OrderManagement = () => {
                       role="menuitem"
                     >
                       View Order
-                    </button>
+                    </button> */}
                   </div>
                 )}
               </div>

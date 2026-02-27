@@ -111,6 +111,7 @@ const BuyerManagement = () => {
       {/* Table Component */}
       <div className="relative overflow-visible">
         <CommonTable
+          path={"buyer"}
           headers={headers}
           data={paginatedData.map((row) => ({
             ...row,

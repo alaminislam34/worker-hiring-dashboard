@@ -114,10 +114,11 @@ const WorkerManagement = () => {
       {/* Table Component */}
       <div className="relative overflow-visible">
         <CommonTable
+          path={"worker"}
           headers={headers}
           data={paginatedData.map((row) => ({
             ...row,
-            // 1. Name and Avatar Column
+
             workerColumn: (
               <div className="flex items-center gap-3">
                 <Image
@@ -132,26 +133,26 @@ const WorkerManagement = () => {
                 </span>
               </div>
             ),
-            // 2. Jobs Completed Column (using fallback if missing in JSON)
+
             jobsCompletedColumn: (
               <span className="text-gray-600 font-medium">
                 {row.jobsCompleted || 30} completed
               </span>
             ),
-            // 3. Rating Column (with Star icon)
+
             ratingColumn: (
               <div className="flex items-center gap-1 text-gray-600 font-medium">
                 <Star size={16} className="fill-yellow-400 text-yellow-400" />
                 {row.rating?.toFixed(1) || "5.0"}
               </div>
             ),
-            // 4. Last Active Column
+
             lastActiveColumn: (
               <span className="text-gray-600 font-medium">
                 {row.lastActive || "1h ago"}
               </span>
             ),
-            // 5. Action Menu
+
             action: (
               <div className="relative flex justify-end px-2">
                 <button
