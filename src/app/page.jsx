@@ -21,7 +21,7 @@ const WelcomeSimple = () => {
       <div className="py-6">
         <h1 className="text-3xl font-bold text-dark">
           {t("welcome.title")} {" "}
-          <span className="text-[#33B1E5]">
+          <span className="text-[#73a34f]">
             {t("brand.adminDashboard")}
           </span>
         </h1>

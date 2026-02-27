@@ -18,6 +18,7 @@ const OrderManagement = () => {
   const router = useRouter();
   const { t } = useTranslation();
   const menuRef = useRef(null);
+  const actionButtonRefs = useRef({});
 
   const [ordersData, setOrdersData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,6 +26,7 @@ const OrderManagement = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [openMenuId, setOpenMenuId] = useState(null);
+  const [menuPosition, setMenuPosition] = useState({});
   const [selectedWorker, setSelectedWorker] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const rowsPerPage = 8;
@@ -41,7 +43,14 @@ const OrderManagement = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
+      // Close menu if click outside menu or action button
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        (!openMenuId ||
+          !actionButtonRefs.current[openMenuId] ||
+          !actionButtonRefs.current[openMenuId].contains(event.target))
+      ) {
         setOpenMenuId(null);
       }
     };
@@ -56,7 +65,7 @@ const OrderManagement = () => {
     { label: t("table.payment"), key: "payment", sortable: false },
     { label: t("table.worker"), key: "worker", sortable: false },
     { label: t("table.status"), key: "status", sortable: false },
-    { label: t("table.budget"), key: "budget", sortable: true },
+    { label: t("table.budget"), key: "budgetColumn", sortable: true },
     { label: "Action", key: "action", sortable: false },
   ];
 
@@ -103,6 +112,7 @@ const OrderManagement = () => {
 
   return (
     <div className="w-full bg-white rounded-3xl md:rounded-[2.5rem] p-4 md:p-8 shadow-sm border border-gray-50 min-h-screen relative">
+      {/* Tabs */}
       <div className="flex gap-4 md:gap-8 border-b border-gray-100 mb-6 overflow-x-auto no-scrollbar">
         {orderTabs.map((tab) => (
           <button
@@ -129,6 +139,7 @@ const OrderManagement = () => {
         ))}
       </div>
 
+      {/* Search */}
       <div className="relative mb-6 md:mb-8">
         <Search
           className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300"
@@ -146,21 +157,54 @@ const OrderManagement = () => {
         />
       </div>
 
-      {/* IMPORTANT: Removed overflow-hidden from here if it exists in your CommonTable wrapper */}
       <div className="overflow-x-visible">
         <CommonTable
           headers={headers}
           data={paginatedData.map((row) => ({
             ...row,
+            // --- FIX: Budget Column logic ---
+            budgetColumn: (
+              <div
+                onClick={() => {
+                  // Only open modal if payment is NOT paid
+                  if (row.payment !== "Paid") {
+                    setSelectedWorker(row);
+                    setIsModalOpen(true);
+                    setOpenMenuId(null); // Hide any open action menus
+                  }
+                }}
+                className={`font-bold py-1 px-2 rounded-lg transition-all ${
+                  row.payment !== "Paid"
+                    ? "cursor-pointer text-white bg-black underline decoration-dotted"
+                    : "text-gray-900"
+                }`}
+              >
+                {row.payment !== "Paid" && "Pay"} {row.budget}
+              </div>
+            ),
+            // --- Action Menu logic ---
             action: (
               <div className="relative flex justify-center items-center">
                 <button
-                  onClick={() =>
+                  ref={(el) => (actionButtonRefs.current[row.order.id] = el)}
+                  aria-haspopup="true"
+                  aria-expanded={openMenuId === row.order.id}
+                  aria-label="Open action menu"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (openMenuId !== row.order.id) {
+                      // Position menu below button
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setMenuPosition({
+                        top: rect.bottom + window.scrollY,
+                        left: rect.right + window.scrollX - 200,
+                      });
+                    }
                     setOpenMenuId(
                       openMenuId === row.order.id ? null : row.order.id,
-                    )
-                  }
-                  className="p-2 hover:bg-gray-100 rounded-full transition-colors z-10"
+                    );
+                  }}
+                  className="p-2 hover:bg-gray-100 rounded-full transition-colors z-10 focus:outline-none focus:ring-2 focus:ring-[#73a34f]"
                 >
                   <EllipsisVertical size={20} className="text-gray-500" />
                 </button>
@@ -168,16 +212,19 @@ const OrderManagement = () => {
                 {openMenuId === row.order.id && (
                   <div
                     ref={menuRef}
-                    /* top-full ensures it starts below the icon. right-0 aligns it to the button edge */
-                    className="absolute right-0 top-full mt-2 z-999 w-48 bg-white shadow-2xl rounded-xl border border-gray-100 overflow-hidden animate-in fade-in zoom-in duration-200"
+                    style={{ minWidth: 200 }}
+                    className="absolute right-0 top-full mt-2 z-9999 w-52 bg-white shadow-2xl rounded-xl border border-gray-100 overflow-hidden animate-in fade-in zoom-in duration-200"
+                    role="menu"
+                    tabIndex={-1}
                   >
                     <button
                       onClick={() => {
+                        router.push(`/dashboard/order/${row.order.id}`);
                         setSelectedWorker(row);
-                        setIsModalOpen(true);
                         setOpenMenuId(null);
                       }}
-                      className="w-full text-left px-4 py-3 text-xs font-semibold hover:bg-[#73a34f] hover:text-white transition-colors border-b border-gray-50"
+                      className="w-full text-left px-4 py-3 text-sm font-semibold flex items-center gap-2 bg-[#73a34f] hover:bg-[#5d8a3c] text-white transition-colors border-b border-gray-50 focus:outline-none focus:bg-[#73a34f] focus:text-white"
+                      role="menuitem"
                     >
                       Payment Details
                     </button>
@@ -186,7 +233,8 @@ const OrderManagement = () => {
                         router.push(`/dashboard/orders/${row.order.id}`);
                         setOpenMenuId(null);
                       }}
-                      className="w-full text-left px-4 py-3 text-xs font-semibold hover:bg-gray-50 text-gray-700 transition-colors"
+                      className="w-full text-left px-4 py-3 text-sm font-semibold flex items-center gap-2 hover:bg-gray-50 text-gray-700 transition-colors focus:outline-none focus:bg-gray-100"
+                      role="menuitem"
                     >
                       View Order
                     </button>
@@ -198,6 +246,7 @@ const OrderManagement = () => {
         />
       </div>
 
+      {/* Pagination */}
       <div className="flex flex-col md:flex-row justify-between items-center mt-8 gap-4">
         <div className="flex items-center gap-2 text-gray-400 font-bold text-sm">
           {t("common.showResult")}:
