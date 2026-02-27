@@ -34,7 +34,7 @@ const AlertDrawer = ({ isOpen, setIsOpen, orders = [] }) => {
 
       {/* Drawer Panel */}
       <div
-        className={`relative bg-white max-w-sm w-full h-full shadow-2xl border-l border-gray-100 transition-transform duration-500 ease-in-out p-6 flex flex-col
+        className={`relative bg-white max-w-sm w-full h-full shadow-2xl border-l border-gray-100 transition-transform duration-500 ease-in-out flex p-4 flex-col
           ${isOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className="flex justify-between items-center mb-6">
@@ -58,7 +58,7 @@ const AlertDrawer = ({ isOpen, setIsOpen, orders = [] }) => {
           {pendingPayments.map((item) => (
             <div
               key={item.id}
-              className={`flex flex-col gap-3 p-4 rounded-2xl border transition-all ${
+              className={`flex flex-col gap-3 p-4 rounded-xl border transition-all ${
                 item.payment === "Unpaid"
                   ? "border-red-100 bg-red-50/30"
                   : "border-gray-100 bg-white hover:border-[#73a34f]/30"
