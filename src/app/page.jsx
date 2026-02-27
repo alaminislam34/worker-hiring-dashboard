@@ -10,7 +10,7 @@ const WelcomeSimple = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.push("/dashboard");
+      router.push("/login");
     }, 1000);
 
     return () => clearTimeout(timer);
@@ -20,14 +20,10 @@ const WelcomeSimple = () => {
     <div className="flex items-center justify-center h-screen text-center">
       <div className="py-6">
         <h1 className="text-3xl font-bold text-dark">
-          {t("welcome.title")} {" "}
-          <span className="text-[#73a34f]">
-            {t("brand.adminDashboard")}
-          </span>
+          {t("welcome.title")}{" "}
+          <span className="text-[#73a34f]">{t("brand.adminDashboard")}</span>
         </h1>
-        <p className="text-gray-500 mt-2">
-          {t("welcome.subtitle")}
-        </p>
+        <p className="text-gray-500 mt-2">{t("welcome.subtitle")}</p>
       </div>
     </div>
   );

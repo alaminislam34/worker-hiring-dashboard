@@ -162,20 +162,18 @@ const OrderManagement = () => {
           headers={headers}
           data={paginatedData.map((row) => ({
             ...row,
-            // --- FIX: Budget Column logic ---
             budgetColumn: (
               <div
                 onClick={() => {
-                  // Only open modal if payment is NOT paid
                   if (row.payment !== "Paid") {
                     setSelectedWorker(row);
                     setIsModalOpen(true);
-                    setOpenMenuId(null); // Hide any open action menus
+                    setOpenMenuId(null);
                   }
                 }}
                 className={`font-bold py-1 px-2 rounded-lg transition-all ${
                   row.payment !== "Paid"
-                    ? "cursor-pointer text-white bg-black underline decoration-dotted"
+                    ? "cursor-pointer text-white bg-black "
                     : "text-gray-900"
                 }`}
               >
