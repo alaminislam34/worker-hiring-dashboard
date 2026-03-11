@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Users, FileText, IdCard, LayoutGrid } from "lucide-react";
+import { Users, FileText, IdCard, LayoutGrid, Headphones } from "lucide-react";
 import { HiOutlineLogout } from "react-icons/hi";
 import { IoMdListBox } from "react-icons/io";
 import { BsFillGrid1X2Fill } from "react-icons/bs";
@@ -43,6 +43,12 @@ const SIDELINKS = [
     icon: <BsCreditCardFill className="text-2xl p-0.5" />,
     href: "/dashboard/payment",
     match: (path) => path.startsWith("/dashboard/payment"),
+  },
+  {
+    key: "support",
+    icon: <Headphones className="text-2xl p-0.5" />,
+    href: "/dashboard/support",
+    match: (path) => path.startsWith("/dashboard/support"),
   },
 ];
 
