@@ -82,13 +82,12 @@ const CommonTable = ({ headers, data, onAction, path }) => {
         );
 
       case "budget":
-      case "amount": // Handles both Order budget and Transaction amount
+      case "amount":
         const orderStatusKey = getOrderStatusKey(row.status);
         const paymentStatusKey = getPaymentStatusKey(row.payment);
         const isPaid =
           orderStatusKey === "completed" || paymentStatusKey === "paid";
 
-        // Show Pay Button only for unpaid orders in Order Management
         if (key === "budget" && !isPaid) {
           return (
             <button
@@ -99,13 +98,11 @@ const CommonTable = ({ headers, data, onAction, path }) => {
             </button>
           );
         }
-        // Otherwise just show the text
         return (
           <span className="text-gray-900 font-bold text-base">{value}</span>
         );
 
       default:
-        // Default text for Email, Phone, Location, Date, IDs
         return <span className="text-gray-700 font-medium">{value}</span>;
     }
   };

@@ -62,7 +62,9 @@ const RefundModal = ({ isOpen, transaction, onClose, onConfirm }) => {
           <X size={22} />
         </button>
 
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Process Refund</h2>
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          Process Refund
+        </h2>
 
         {/* Transaction Details */}
         <div className="mb-6 p-4 bg-red-50 rounded-xl border border-red-100">
@@ -72,7 +74,9 @@ const RefundModal = ({ isOpen, transaction, onClose, onConfirm }) => {
                 <p className="text-red-600 font-semibold text-sm mb-1">
                   Payment ID: {transaction.paymentId}
                 </p>
-                <p className="text-gray-700 font-medium">{transaction.user.name}</p>
+                <p className="text-gray-700 font-medium">
+                  {transaction.user.name}
+                </p>
               </div>
               <span className="bg-red-600 text-white px-3 py-1 rounded-lg text-sm font-bold">
                 Refund
@@ -139,7 +143,9 @@ const RefundModal = ({ isOpen, transaction, onClose, onConfirm }) => {
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-gray-50 rounded-xl p-4">
               <p className="text-gray-500 text-sm mb-1">Payment Status</p>
-              <p className="text-gray-900 font-bold">{transaction.status || "Completed"}</p>
+              <p className="text-gray-900 font-bold">
+                {transaction.status || "Completed"}
+              </p>
             </div>
             <div className="bg-gray-50 rounded-xl p-4">
               <p className="text-gray-500 text-sm mb-1">Payment Type</p>
@@ -234,6 +240,7 @@ const TransactionHistory = () => {
     { key: "all", label: t("table.allPayment") },
     { key: "credit", label: t("paymentType.credit") },
     { key: "debit", label: t("paymentType.debit") },
+    { key: "Refund", label: "Refund" },
   ];
 
   // Logic: Combined Tab and Search Filter
@@ -262,11 +269,18 @@ const TransactionHistory = () => {
     setTransactions((prevTransactions) =>
       prevTransactions.map((transaction) =>
         transaction.paymentId === paymentId
-          ? { ...transaction, status: "Refunded", refundReason: reason, refundAmount: amount }
-          : transaction
-      )
+          ? {
+              ...transaction,
+              status: "Refunded",
+              refundReason: reason,
+              refundAmount: amount,
+            }
+          : transaction,
+      ),
     );
-    console.log(`Refund processed for Payment ${paymentId}: $${amount}, Reason: ${reason}`);
+    console.log(
+      `Refund processed for Payment ${paymentId}: $${amount}, Reason: ${reason}`,
+    );
   };
 
   if (loading)
