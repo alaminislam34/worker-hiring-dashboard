@@ -25,7 +25,6 @@ const WorkerManagement = () => {
   const rowsPerPage = 8;
   const { t } = useTranslation();
 
-  // Close menu on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
